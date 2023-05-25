@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Jq+GiI23SC14Qe7GUSNXEd5/5g/uisMk3SjzbSNi7zA=",
+  "Source": "EngLift.WebAPI",
+  "BasePath": "_content/EngLift.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

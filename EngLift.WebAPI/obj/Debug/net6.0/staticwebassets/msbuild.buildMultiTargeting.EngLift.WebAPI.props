@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EngLift.WebAPI.props" />
+</Project>
