@@ -11,7 +11,7 @@ namespace EngLift.Data
     public class BuildDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         private readonly IHttpContextAccessor? _httpContextAccessor;
-        public BuildDbContext(DbContextOptions<BuildDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
+        public BuildDbContext(DbContextOptions<BuildDbContext> options, IHttpContextAccessor? httpContextAccessor) : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
         }
@@ -52,7 +52,7 @@ namespace EngLift.Data
             var entities = ChangeTracker.Entries();
             foreach (var entity in entities)
             {
-                if (entity.Entity is IAudit && _httpContextAccessor.HttpContext != null && _httpContextAccessor.HttpContext.User != null)
+                if (entity.Entity is IAudit && _httpContextAccessor?.HttpContext != null && _httpContextAccessor?.HttpContext.User != null)
                 {
                     IAudit audit = (IAudit)entity.Entity;
                     string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;

@@ -1,0 +1,12 @@
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Sercurity.deps.json
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Sercurity.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Sercurity.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.csproj.AssemblyReference.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.AssemblyInfoInputs.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.AssemblyInfo.cs
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.csproj.CoreCompileInputs.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\refint\EngLift.Sercurity.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\ref\EngLift.Sercurity.dll

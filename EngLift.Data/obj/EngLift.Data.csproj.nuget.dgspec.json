@@ -28,6 +28,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj": {
+                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj"
+              },
               "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj": {
                 "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj"
               }
@@ -44,6 +47,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -59,8 +66,67 @@
             "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
               "version": "[6.0.16, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj",
+        "projectName": "EngLift.DTO",
+        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj",
+        "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",

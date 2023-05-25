@@ -1,0 +1,12 @@
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Service.deps.json
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Service.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Service.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.csproj.AssemblyReference.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.AssemblyInfoInputs.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.AssemblyInfo.cs
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.csproj.CoreCompileInputs.cache
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\refint\EngLift.Service.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\ref\EngLift.Service.dll
