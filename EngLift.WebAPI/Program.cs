@@ -30,15 +30,18 @@ services.AddServiceDependencyExtension();
 var app = builder.Build();
 
 #region Seed Data
-using (var scope = app.Services.CreateScope())
+if (bool.Parse(builder.Configuration["SeedData"]) == true)
 {
-    var adminDTO = new UserAdminSeedDTO()
+    using (var scope = app.Services.CreateScope())
     {
-        Email = builder.Configuration["AdminAccount:Email"],
-        UserName = builder.Configuration["AdminAccount:UserName"],
-        Password = builder.Configuration["AdminAccount:Password"],
-    };
-    SeedData.Initialize(scope.ServiceProvider, adminDTO);
+        var adminDTO = new UserAdminSeedDTO()
+        {
+            Email = builder.Configuration["AdminAccount:Email"],
+            UserName = builder.Configuration["AdminAccount:UserName"],
+            Password = builder.Configuration["AdminAccount:Password"],
+        };
+        SeedData.Initialize(scope.ServiceProvider, adminDTO);
+    }
 }
 #endregion
 // Configure the HTTP request pipeline.
