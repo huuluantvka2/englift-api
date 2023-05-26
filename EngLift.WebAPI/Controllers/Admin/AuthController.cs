@@ -19,8 +19,8 @@ namespace EngLift.WebAPI.Controllers.Admin
             _authService = authService;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginDTO dto)
+        [HttpPost("Signin")]
+        public async Task<IActionResult> LoginAdmin([FromBody] UserLoginDTO dto)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
             catch (ServiceExeption ex)
             {
-                _logger.LogInformation($"AuthService -> LoginAdmin Throw Exception: {ex.Message}");
+                _logger.LogInformation($"AuthController -> LoginAdmin Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }

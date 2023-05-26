@@ -110,7 +110,7 @@ namespace EngLift.WebAPI.Controllers.Base
         }
 
         [NonAction]
-        protected IActionResult HandleError(ServiceExeption ex)
+        protected IActionResult HandleError(Exception ex)
         {
             if (ex is ServiceExeption)
             {

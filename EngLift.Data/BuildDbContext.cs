@@ -54,7 +54,7 @@ namespace EngLift.Data
             var entities = ChangeTracker.Entries();
             foreach (var entity in entities)
             {
-                if (entity.Entity is IAudit && _httpContextAccessor?.HttpContext != null && _httpContextAccessor?.HttpContext.User != null)
+                if (entity.Entity is IAudit && _httpContextAccessor?.HttpContext != null && _httpContextAccessor?.HttpContext.User != null && _httpContextAccessor.HttpContext.User.FindFirst("UserId") != null)
                 {
                     IAudit audit = (IAudit)entity.Entity;
                     string userId = _httpContextAccessor.HttpContext.User.FindFirst("UserId").Value;

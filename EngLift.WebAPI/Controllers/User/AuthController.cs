@@ -1,4 +1,6 @@
-﻿using EngLift.DTO.User;
+﻿using EngLift.Common;
+using EngLift.DTO.Base;
+using EngLift.DTO.User;
 using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Base;
@@ -19,17 +21,38 @@ namespace EngLift.WebAPI.Controllers.User
             _authService = authService;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginDTO dto)
+        [HttpPost("Signup")]
+        public async Task<IActionResult> CreateUser([FromBody] UserSignUpDTO dto)
         {
             try
             {
-                var result = await _authService.LoginAdmin(dto);
+                #region Validate
+                if (dto.Password.Length < 6)
+                {
+                    return BadRequest(ErrorMessage.AT_LEAST_SIX_CHARACTER_FOR_PASSWORD);
+                }
+                #endregion
+                var result = await _authService.CreateUser(dto);
+                return Success<SingleId>(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"AuthController -> CreateUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpPost("Signin")]
+        public async Task<IActionResult> LoginUser([FromBody] UserLoginDTO dto)
+        {
+            try
+            {
+                var result = await _authService.LoginUser(dto);
                 return Success<LoginSuccessDTO>(result);
             }
             catch (ServiceExeption ex)
             {
-                _logger.LogInformation($"AuthService -> LoginAdmin Throw Exception: {ex.Message}");
+                _logger.LogInformation($"AuthController -> LoginUser Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }
