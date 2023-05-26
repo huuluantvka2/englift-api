@@ -8,6 +8,8 @@ namespace EngLift.Service.Extensions
     {
         public static IServiceCollection AddServiceDependencyExtension(this IServiceCollection services)
         {
+            services.AddSingleton<JwtService>();
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILessonService, LessonService>();

@@ -10,3 +10,10 @@ C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngL
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\refint\EngLift.Sercurity.dll
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.pdb
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\ref\EngLift.Sercurity.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Data.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.DTO.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Model.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Data.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Model.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.DTO.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.csproj.CopyComplete

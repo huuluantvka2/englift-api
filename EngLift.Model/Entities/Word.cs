@@ -29,5 +29,6 @@ namespace EngLift.Model.Entities
         public string? Image { get; set; }
         [MaxLength(50)]
         public string? Position { get; set; }
+        public bool Active { get; set; } = true;
     }
 }

@@ -24,7 +24,7 @@ namespace EngLift.Model.Entities
         public int? Viewed { get; set; } = 0;
         [MaxLength(256)]
         public string? Image { get; set; }
-
+        public bool Active { get; set; } = true;
 
     }
 }

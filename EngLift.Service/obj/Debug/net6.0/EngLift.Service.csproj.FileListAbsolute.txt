@@ -10,3 +10,12 @@ C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLif
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\refint\EngLift.Service.dll
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.pdb
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\ref\EngLift.Service.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Model.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Model.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\obj\Debug\net6.0\EngLift.Service.csproj.CopyComplete
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Common.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Data.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.DTO.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Common.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.Data.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Service\bin\Debug\net6.0\EngLift.DTO.pdb

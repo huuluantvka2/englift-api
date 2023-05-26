@@ -1,10 +1,10 @@
-﻿using EngLift.Model.Entities;
+﻿using EngLift.Data.Extension;
+using EngLift.Model.Entities;
 using EngLift.Model.Entities.Identity;
 using EngLift.Model.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace EngLift.Data
 {
@@ -33,6 +33,8 @@ namespace EngLift.Data
                        .ToTable(entityType.GetTableName().Replace("AspNet", ""));
 
             builder.Entity<LessonWord>().ToTable("LessonWords").HasKey(k => new { k.LessonId, k.WordId });
+
+            builder.AddDefaultValueModelBuilder();
         }
 
         public override int SaveChanges()
@@ -55,7 +57,7 @@ namespace EngLift.Data
                 if (entity.Entity is IAudit && _httpContextAccessor?.HttpContext != null && _httpContextAccessor?.HttpContext.User != null)
                 {
                     IAudit audit = (IAudit)entity.Entity;
-                    string userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    string userId = _httpContextAccessor.HttpContext.User.FindFirst("UserId").Value;
                     var now = DateTime.UtcNow;
                     switch (entity.State)
                     {

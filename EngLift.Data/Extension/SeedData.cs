@@ -30,6 +30,7 @@ namespace EngLift.Data.Extension
                 PhoneNumber = "0339181198",
                 TwoFactorEnabled = false,
                 PhoneNumberConfirmed = true,
+                FullName = "Admin"
             };
 
             var passwordHasher = new PasswordHasher<User>();
