@@ -25,7 +25,7 @@ namespace EngLift.WebAPI.Controllers.Admin
         }
 
         [HttpGet("Users")]
-        [Authorize(Roles = RolesName.ROLE_SYSTEM_ADMIN)]
+        [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_USER)]
         public async Task<IActionResult> GetAllUser([FromQuery] BaseRequest request)
         {
             try

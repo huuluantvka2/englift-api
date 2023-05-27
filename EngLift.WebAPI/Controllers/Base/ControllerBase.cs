@@ -1,11 +1,19 @@
 ﻿using EngLift.Common;
 using EngLift.DTO.Response;
 using EngLift.Service.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace EngLift.WebAPI.Controllers.Base
 {
+    public class RolesAllow : AuthorizeAttribute
+    {
+        public RolesAllow(params string[] roles)
+        {
+            Roles = String.Join(",", roles);
+        }
+    }
     public abstract class ControllerApiBase<TController> : Controller
     {
         protected ILogger<TController> _logger;

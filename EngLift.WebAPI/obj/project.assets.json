@@ -1356,8 +1356,9 @@
         "dependencies": {
           "EngLift.Data": "1.0.0",
           "EngLift.Model": "1.0.0",
+          "EngLift.Service": "1.0.0",
           "Microsoft.AspNetCore.Authorization": "6.0.16",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
         },
         "compile": {
           "bin/placeholder/EngLift.Sercurity.dll": {}

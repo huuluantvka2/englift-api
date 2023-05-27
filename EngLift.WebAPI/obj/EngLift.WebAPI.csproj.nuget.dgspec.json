@@ -299,6 +299,9 @@
               },
               "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj": {
                 "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj"
+              },
+              "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Service\\EngLift.Service.csproj": {
+                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Service\\EngLift.Service.csproj"
               }
             }
           }
@@ -319,7 +322,7 @@
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[7.0.0, )"
             }
           },
           "imports": [

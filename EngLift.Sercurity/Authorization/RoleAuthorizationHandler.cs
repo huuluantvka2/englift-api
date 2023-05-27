@@ -1,6 +1,9 @@
-﻿using EngLift.Data.Infrastructure.Interfaces;
+﻿using EngLift.Common;
+using EngLift.Data.Infrastructure.Interfaces;
+using EngLift.Service.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
+using System.Net;
 using System.Security.Claims;
 
 namespace EngLift.Sercurity.Authorization
@@ -16,8 +19,7 @@ namespace EngLift.Sercurity.Authorization
         {
             if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
-                context.Fail();
-                return Task.CompletedTask;
+                throw new ServiceExeption(HttpStatusCode.Unauthorized, ErrorMessage.UNAUTHORIZED);
             }
 
             if (requirement.AllowedRoles == null || requirement.AllowedRoles.Any() == false)
@@ -29,7 +31,7 @@ namespace EngLift.Sercurity.Authorization
                 Guid userId = Guid.Parse(context.User.FindFirstValue("UserId"));
                 bool found = _unitOfWork.UserRolesRepo.GetAll().Any(x => x.UserId == userId && requirement.AllowedRoles.Contains(x.Role.Name));
                 if (found) context.Succeed(requirement);
-                else context.Fail();
+                else throw new ServiceExeption(HttpStatusCode.Forbidden, ErrorMessage.FORBIDDEN);
             }
             return Task.CompletedTask;
 

@@ -19,3 +19,5 @@ C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngL
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\obj\Debug\net6.0\EngLift.Sercurity.csproj.CopyComplete
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Common.dll
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Common.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Service.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Sercurity\bin\Debug\net6.0\EngLift.Service.pdb

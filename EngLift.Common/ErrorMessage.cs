@@ -7,5 +7,7 @@
         public static string INCORRECT_PASSWORD = "INCORRECT_PASSWORD";
         public static string BAD_GATEWAY = "BAD_GATEWAY";
         public static string AT_LEAST_SIX_CHARACTER_FOR_PASSWORD = "AT_LEAST_SIX_CHARACTER_FOR_PASSWORD";
+        public static string UNAUTHORIZED = "UNAUTHORIZED";
+        public static string FORBIDDEN = "FORBIDDEN";
     }
 }
