@@ -1,12 +1,15 @@
-﻿using EngLift.Data.Infrastructure.Interfaces;
+﻿using EngLift.Common;
+using EngLift.Data.Infrastructure.Interfaces;
 using EngLift.DTO.Base;
 using EngLift.DTO.Response;
 using EngLift.DTO.User;
 using EngLift.Model.Entities.Identity;
+using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace EngLift.Service.Implements
 {
@@ -21,15 +24,16 @@ namespace EngLift.Service.Implements
         {
             _logger.LogInformation($"UserService -> GetAllUser with query {JsonConvert.SerializeObject(request)}");
             var result = new DataList<UserItemDTO>();
-            IQueryable<User> query = UnitOfWork.UsersRepo.GetAll().Where(x =>
-                                                                            x.Deleted == false &&
-                                                                            x.IsAdmin == false &&
-                                                                            String.IsNullOrEmpty(request.Search) ? true :
-                                                                                (
-                                                                                x.FullName.ToLower().Contains(request.Search) ||
-                                                                                x.Email.ToLower().Contains(request.Search)
-                                                                                )
-                                                                         );
+            IQueryable<User> query = UnitOfWork.UsersRepo.GetAll()
+                .Where(x =>
+                    x.Deleted == false &&
+                    x.IsAdmin == false &&
+                    String.IsNullOrEmpty(request.Search) ? true :
+                        (
+                        x.FullName.ToLower().Contains(request.Search) ||
+                        x.Email.ToLower().Contains(request.Search)
+                        )
+                    );
             result.TotalRecord = query.Count();
             if (request.Sort != null)
             {
@@ -61,6 +65,51 @@ namespace EngLift.Service.Implements
 
             _logger.LogInformation($"UserService -> GetAllUser successfully ");
             return result;
+        }
+
+        public async Task<SingleId> AdminUpdateUser(Guid Id, UserAdminUpdateDTO dto)
+        {
+            _logger.LogInformation($"UserService -> AdminUpdateUser with dto {JsonConvert.SerializeObject(dto)}");
+            var user = UnitOfWork.UsersRepo.GetById(Id);
+            if (user == null || user.IsAdmin == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
+            }
+            else if (user.Deleted == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.BadRequest, ErrorMessage.USER_IS_DELETED);
+            }
+            user.RefCode = dto.RefCode;
+            user.Active = dto.Active;
+            user.FullName = dto.FullName;
+
+            UnitOfWork.UsersRepo.Update(user);
+            await UnitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation($"UserService -> AdminUpdateUser successfully");
+            return new SingleId() { Id = Id };
+        }
+
+        public async Task<SingleId> AdminDeleteUser(Guid Id)
+        {
+            _logger.LogInformation($"UserService -> AdminDeleteUser with id {JsonConvert.SerializeObject(Id)}");
+            var user = UnitOfWork.UsersRepo.GetById(Id);
+            if (user == null || user.IsAdmin == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
+            }
+            else if (user.Deleted == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.BadRequest, ErrorMessage.USER_IS_DELETED);
+            }
+            user.Deleted = true;
+            user.Active = false;
+
+            UnitOfWork.UsersRepo.Update(user);
+            await UnitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation($"UserService -> AdminDeleteUser successfully");
+            return new SingleId() { Id = Id };
         }
     }
 }

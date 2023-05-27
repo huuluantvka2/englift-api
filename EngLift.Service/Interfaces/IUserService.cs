@@ -7,5 +7,7 @@ namespace EngLift.Service.Interfaces
     public interface IUserService
     {
         Task<DataList<UserItemDTO>> GetAllUser(BaseRequest request);
+        Task<SingleId> AdminDeleteUser(Guid Id);
+        Task<SingleId> AdminUpdateUser(Guid Id, UserAdminUpdateDTO dto);
     }
 }

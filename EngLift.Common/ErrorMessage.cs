@@ -9,5 +9,6 @@
         public static string AT_LEAST_SIX_CHARACTER_FOR_PASSWORD = "AT_LEAST_SIX_CHARACTER_FOR_PASSWORD";
         public static string UNAUTHORIZED = "UNAUTHORIZED";
         public static string FORBIDDEN = "FORBIDDEN";
+        public static string USER_IS_DELETED = "USER_IS_DELETED";
     }
 }

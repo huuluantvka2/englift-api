@@ -39,5 +39,37 @@ namespace EngLift.WebAPI.Controllers.Admin
                 return HandleError(ex);
             }
         }
+
+        [HttpPut("Users/{Id}")]
+        [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_USER)]
+        public async Task<IActionResult> AdminUpdateUser(Guid Id, [FromBody] UserAdminUpdateDTO dto)
+        {
+            try
+            {
+                var result = await _userService.AdminUpdateUser(Id, dto);
+                return Success<SingleId>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"UserController -> AdminUpdateUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpDelete("Users/{Id}")]
+        [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_USER)]
+        public async Task<IActionResult> AdminDeleteUser(Guid Id)
+        {
+            try
+            {
+                var result = await _userService.AdminDeleteUser(Id);
+                return Success<SingleId>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"UserController -> AdminDeleteUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
     }
 }

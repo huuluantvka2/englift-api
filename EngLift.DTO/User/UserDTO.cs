@@ -43,4 +43,11 @@ namespace EngLift.DTO.User
         public TYPE_LOGIN TypeLogin { get; set; }
     }
 
+    public class UserAdminUpdateDTO
+    {
+        public string FullName { get; set; }
+        public bool Active { get; set; }
+        public string? RefCode { get; set; }
+    }
+
 }

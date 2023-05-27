@@ -14,6 +14,7 @@ namespace EngLift.Service.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILessonService, LessonService>();
             services.AddScoped<IWordService, WordService>();
+            services.AddScoped<ICourseService, CourseService>();
 
             return services;
         }
