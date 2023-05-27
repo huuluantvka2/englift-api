@@ -49,6 +49,13 @@ namespace EngLift.Data.Infrastructure.Interfaces
         private ILessonRepository lessonsRepo { get; set; }
         public ILessonRepository LessonsRepo => lessonsRepo ?? (new LessonRepository(_dbFactory));
 
+        private IUserRepository usersRepo { get; set; }
+        public IUserRepository UsersRepo => usersRepo ?? (new UserRepository(_dbFactory));
+        private ICourseRepository coursesRepo { get; set; }
+        public ICourseRepository CoursesRepo => coursesRepo ?? (new CourseRepository(_dbFactory));
+        private IUserRoleRepository userRolesRepo { get; set; }
+        public IUserRoleRepository UserRolesRepo => userRolesRepo ?? (new UserRoleRepository(_dbFactory));
+
         #endregion
     }
 }

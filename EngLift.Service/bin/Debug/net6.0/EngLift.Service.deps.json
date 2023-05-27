@@ -660,6 +660,7 @@
       },
       "EngLift.Data/1.0.0": {
         "dependencies": {
+          "EngLift.Common": "1.0.0",
           "EngLift.DTO": "1.0.0",
           "EngLift.Model": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -674,6 +675,9 @@
         }
       },
       "EngLift.DTO/1.0.0": {
+        "dependencies": {
+          "EngLift.Model": "1.0.0"
+        },
         "runtime": {
           "EngLift.DTO.dll": {}
         }

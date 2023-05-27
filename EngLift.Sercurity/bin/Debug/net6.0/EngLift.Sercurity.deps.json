@@ -10,10 +10,24 @@
         "dependencies": {
           "EngLift.Data": "1.0.0",
           "EngLift.Model": "1.0.0",
+          "Microsoft.AspNetCore.Authorization": "6.0.16",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
         },
         "runtime": {
           "EngLift.Sercurity.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authorization/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Metadata": "6.0.16",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.3",
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1623.17406"
+          }
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/6.0.16": {
@@ -85,6 +99,14 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Metadata/6.0.16": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1623.17406"
+          }
+        }
+      },
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
         "dependencies": {
           "Microsoft.Net.Http.Headers": "2.2.0",
@@ -150,7 +172,7 @@
         "dependencies": {
           "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.3",
           "Microsoft.Extensions.Options": "6.0.0",
           "Microsoft.Extensions.Primitives": "6.0.0"
         },
@@ -222,7 +244,7 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "6.0.1",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.3",
           "Microsoft.Extensions.Options": "6.0.0",
           "System.Diagnostics.DiagnosticSource": "6.0.1"
         },
@@ -233,11 +255,11 @@
           }
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/6.0.3": {
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.Logging.Abstractions.dll": {
             "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.21.52210"
+            "fileVersion": "6.0.1122.52304"
           }
         }
       },
@@ -324,8 +346,14 @@
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
       "System.Text.Encodings.Web/4.5.0": {},
+      "EngLift.Common/1.0.0": {
+        "runtime": {
+          "EngLift.Common.dll": {}
+        }
+      },
       "EngLift.Data/1.0.0": {
         "dependencies": {
+          "EngLift.Common": "1.0.0",
           "EngLift.DTO": "1.0.0",
           "EngLift.Model": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -340,6 +368,9 @@
         }
       },
       "EngLift.DTO/1.0.0": {
+        "dependencies": {
+          "EngLift.Model": "1.0.0"
+        },
         "runtime": {
           "EngLift.DTO.dll": {}
         }
@@ -359,6 +390,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.AspNetCore.Authorization/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cH4jU2xuNptO6HXl2gyF/+lWvIOLXj53x8YPPLQ9vcvSDJwZmdI5+l8MXm/Yk31EI626KwWJr4hxbfZiPw3WhQ==",
+      "path": "microsoft.aspnetcore.authorization/6.0.16",
+      "hashPath": "microsoft.aspnetcore.authorization.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.16": {
       "type": "package",
@@ -401,6 +439,13 @@
       "sha512": "sha512-V3/fddcj0OG4kgluPK6eh+dzB6U2YcEVheTmC1sHqvXTh1Zz30nNEkmy7GtHL+U10AwF4mRQ0DmuYbAbiM3Cwg==",
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/6.0.16",
       "hashPath": "microsoft.aspnetcore.identity.entityframeworkcore.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Metadata/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nXuClg3284DKBwVp6Dfai+tVDLsqkOMB87mPNocCLjSlgfYRBnf0XpdrJCHKmAipabG75S2HGhUjawYEHJKhVA==",
+      "path": "microsoft.aspnetcore.metadata/6.0.16",
+      "hashPath": "microsoft.aspnetcore.metadata.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "type": "package",
@@ -493,12 +538,12 @@
       "path": "microsoft.extensions.logging/6.0.0",
       "hashPath": "microsoft.extensions.logging.6.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.Logging.Abstractions/6.0.0": {
+    "Microsoft.Extensions.Logging.Abstractions/6.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/HggWBbTwy8TgebGSX5DBZ24ndhzi93sHUBDvP1IxbZD7FDokYzdAr6+vbWGjw2XAfR2EJ1sfKUotpjHnFWPxA==",
-      "path": "microsoft.extensions.logging.abstractions/6.0.0",
-      "hashPath": "microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512"
+      "sha512": "sha512-SUpStcdjeBbdKjPKe53hVVLkFjylX0yIXY8K+xWa47+o1d+REDyOMZjHZa+chsQI1K9qZeiHWk9jos0TFU7vGg==",
+      "path": "microsoft.extensions.logging.abstractions/6.0.3",
+      "hashPath": "microsoft.extensions.logging.abstractions.6.0.3.nupkg.sha512"
     },
     "Microsoft.Extensions.ObjectPool/2.2.0": {
       "type": "package",
@@ -576,6 +621,11 @@
       "sha512": "sha512-Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
       "path": "system.text.encodings.web/4.5.0",
       "hashPath": "system.text.encodings.web.4.5.0.nupkg.sha512"
+    },
+    "EngLift.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "EngLift.Data/1.0.0": {
       "type": "project",

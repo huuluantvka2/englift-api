@@ -27,5 +27,6 @@ namespace EngLift.Model.Entities.Identity
         public bool? IsAdmin { get; set; } = false;
         public bool Active { get; set; } = true;
         public bool Deleted { get; set; } = false;
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

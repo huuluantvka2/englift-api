@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EngLift.Common\EngLift.Common.csproj" />
     <ProjectReference Include="..\EngLift.DTO\EngLift.DTO.csproj" />
     <ProjectReference Include="..\EngLift.Model\EngLift.Model.csproj" />
   </ItemGroup>

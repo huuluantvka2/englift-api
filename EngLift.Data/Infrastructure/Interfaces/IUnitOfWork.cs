@@ -15,6 +15,9 @@ namespace EngLift.Data.Infrastructure.Interfaces
         #region Repo
         IWordRepository WordsRepo { get; }
         ILessonRepository LessonsRepo { get; }
+        IUserRepository UsersRepo { get; }
+        ICourseRepository CoursesRepo { get; }
+        IUserRoleRepository UserRolesRepo { get; }
         #endregion
     }
 }

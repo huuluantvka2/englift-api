@@ -1,12 +1,14 @@
 ﻿using EngLift.Data;
 using EngLift.Model.Entities.Identity;
+using EngLift.Sercurity.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EngLift.Sercurity
 {
     public static class IdentityFrameworkCoreExtension
     {
-        public static IServiceCollection AddIdentityFrameworkCoreExtension(this IServiceCollection services)
+        public static IServiceCollection AddIdentityFrameworkCore(this IServiceCollection services)
         {
             services.AddIdentityCore<User>(options =>
             {
@@ -19,6 +21,7 @@ namespace EngLift.Sercurity
                 options.Password.RequireLowercase = false;
             })
             .AddEntityFrameworkStores<BuildDbContext>();
+            services.AddTransient<IAuthorizationHandler, RoleAuthorizationHandler>();
             return services;
         }
     }

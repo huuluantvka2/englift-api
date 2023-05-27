@@ -15,3 +15,5 @@ C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\obj\Debug\net6.0\EngLift.D
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\obj\Debug\net6.0\ref\EngLift.Data.dll
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\bin\Debug\net6.0\EngLift.DTO.dll
 C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\bin\Debug\net6.0\EngLift.DTO.pdb
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\bin\Debug\net6.0\EngLift.Common.dll
+C:\Users\huulu\source\repos\Core\EngLift\EngLift.Data\bin\Debug\net6.0\EngLift.Common.pdb

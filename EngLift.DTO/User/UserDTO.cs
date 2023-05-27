@@ -1,4 +1,7 @@
-﻿namespace EngLift.DTO.User
+﻿using EngLift.Model.Abstracts;
+using EngLift.Model.Entities.Identity;
+
+namespace EngLift.DTO.User
 {
     public class UserAdminSeedDTO
     {
@@ -27,4 +30,17 @@
         public string FullName { get; set; }
         public string? RefCode { get; set; }
     }
+    public class UserItemDTO : AuditBase
+    {
+        public Guid Id { get; set; }
+        public string FullName { get; set; }
+        public bool Active { get; set; }
+        public bool Deteted { get; set; }
+        public string Email { get; set; }
+        public string? OAuthId { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? RefCode { get; set; }
+        public TYPE_LOGIN TypeLogin { get; set; }
+    }
+
 }

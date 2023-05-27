@@ -1,5 +1,5 @@
 ﻿using EngLift.Common;
-using EngLift.DTO.Base;
+using EngLift.DTO.Response;
 using EngLift.DTO.User;
 using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;

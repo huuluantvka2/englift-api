@@ -11,6 +11,7 @@
           "EngLift.Data": "1.0.0",
           "EngLift.Sercurity": "1.0.0",
           "EngLift.Service": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.16",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.16",
           "Microsoft.EntityFrameworkCore": "6.0.16",
           "Microsoft.EntityFrameworkCore.Abstractions": "6.0.16",
@@ -31,6 +32,30 @@
           "lib/netstandard2.0/Humanizer.dll": {
             "assemblyVersion": "2.8.0.0",
             "fileVersion": "2.8.26.1919"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.16": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.10.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "assemblyVersion": "6.0.16.0",
+            "fileVersion": "6.0.1623.17406"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authorization/6.0.16": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Metadata": "6.0.16",
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "Microsoft.Extensions.Options": "7.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.1623.17406"
           }
         }
       },
@@ -81,6 +106,14 @@
         "runtime": {
           "lib/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
             "assemblyVersion": "6.0.16.0",
+            "fileVersion": "6.0.1623.17406"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Metadata/6.0.16": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {
+            "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.1623.17406"
           }
         }
@@ -329,6 +362,30 @@
           "lib/net6.0/Microsoft.IdentityModel.Logging.dll": {
             "assemblyVersion": "6.30.1.0",
             "fileVersion": "6.30.1.40510"
+          }
+        }
+      },
+      "Microsoft.IdentityModel.Protocols/6.10.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Logging": "6.30.1",
+          "Microsoft.IdentityModel.Tokens": "6.30.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.IdentityModel.Protocols.dll": {
+            "assemblyVersion": "6.10.0.0",
+            "fileVersion": "6.10.0.20330"
+          }
+        }
+      },
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.10.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols": "6.10.0",
+          "System.IdentityModel.Tokens.Jwt": "6.30.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
+            "assemblyVersion": "6.10.0.0",
+            "fileVersion": "6.10.0.20330"
           }
         }
       },
@@ -685,6 +742,7 @@
       },
       "EngLift.Data/1.0.0": {
         "dependencies": {
+          "EngLift.Common": "1.0.0",
           "EngLift.DTO": "1.0.0",
           "EngLift.Model": "1.0.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -699,6 +757,9 @@
         }
       },
       "EngLift.DTO/1.0.0": {
+        "dependencies": {
+          "EngLift.Model": "1.0.0"
+        },
         "runtime": {
           "EngLift.DTO.dll": {}
         }
@@ -715,6 +776,7 @@
         "dependencies": {
           "EngLift.Data": "1.0.0",
           "EngLift.Model": "1.0.0",
+          "Microsoft.AspNetCore.Authorization": "6.0.16",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0"
         },
         "runtime": {
@@ -753,6 +815,20 @@
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-T4AkjPXOYDqDnfb8PRRHNbB2ozLg9J7CsRZ+jH1MfQGshkFosdwja9c4+QVbKm+1qeLPxul+3weSz+DEvFkA5w==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.16",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authorization/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cH4jU2xuNptO6HXl2gyF/+lWvIOLXj53x8YPPLQ9vcvSDJwZmdI5+l8MXm/Yk31EI626KwWJr4hxbfZiPw3WhQ==",
+      "path": "microsoft.aspnetcore.authorization/6.0.16",
+      "hashPath": "microsoft.aspnetcore.authorization.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.16": {
       "type": "package",
@@ -795,6 +871,13 @@
       "sha512": "sha512-V3/fddcj0OG4kgluPK6eh+dzB6U2YcEVheTmC1sHqvXTh1Zz30nNEkmy7GtHL+U10AwF4mRQ0DmuYbAbiM3Cwg==",
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/6.0.16",
       "hashPath": "microsoft.aspnetcore.identity.entityframeworkcore.6.0.16.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Metadata/6.0.16": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nXuClg3284DKBwVp6Dfai+tVDLsqkOMB87mPNocCLjSlgfYRBnf0XpdrJCHKmAipabG75S2HGhUjawYEHJKhVA==",
+      "path": "microsoft.aspnetcore.metadata/6.0.16",
+      "hashPath": "microsoft.aspnetcore.metadata.6.0.16.nupkg.sha512"
     },
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "type": "package",
@@ -984,6 +1067,20 @@
       "sha512": "sha512-zE6TG08T8MPZfkXqOWegvvIhKZRiYyj2xgr4QQuWyXypSGPyZrkBwJf5IXU4T3aIKqVfALSnAYCW/IqMaCY4gA==",
       "path": "microsoft.identitymodel.logging/6.30.1",
       "hashPath": "microsoft.identitymodel.logging.6.30.1.nupkg.sha512"
+    },
+    "Microsoft.IdentityModel.Protocols/6.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DFyXD0xylP+DknCT3hzJ7q/Q5qRNu0hO/gCU90O0ATdR0twZmlcuY9RNYaaDofXKVbzcShYNCFCGle2G/o8mkg==",
+      "path": "microsoft.identitymodel.protocols/6.10.0",
+      "hashPath": "microsoft.identitymodel.protocols.6.10.0.nupkg.sha512"
+    },
+    "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LVvMXAWPbPeEWTylDrxunlHH2wFyE4Mv0L4gZrJHC4HTESbWHquKZb/y/S8jgiQEDycOP0PDQvbG4RR/tr2TVQ==",
+      "path": "microsoft.identitymodel.protocols.openidconnect/6.10.0",
+      "hashPath": "microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512"
     },
     "Microsoft.IdentityModel.Tokens/6.30.1": {
       "type": "package",

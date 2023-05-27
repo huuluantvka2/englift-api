@@ -83,6 +83,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Common\\EngLift.Common.csproj": {
+                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Common\\EngLift.Common.csproj"
+              },
               "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj": {
                 "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.DTO\\EngLift.DTO.csproj"
               },
@@ -170,7 +173,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj": {
+                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Model\\EngLift.Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -306,6 +313,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -476,6 +487,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.16, )"

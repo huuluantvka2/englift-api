@@ -20,6 +20,7 @@ namespace EngLift.Data
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<LessonWord> LessonWords { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         #endregion
 
@@ -32,7 +33,18 @@ namespace EngLift.Data
                 builder.Entity(entityType.ClrType)
                        .ToTable(entityType.GetTableName().Replace("AspNet", ""));
 
-            builder.Entity<LessonWord>().ToTable("LessonWords").HasKey(k => new { k.LessonId, k.WordId });
+            builder.Entity<UserRole>().HasKey(x => x.Id);
+            builder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                        .IsRequired();
+
+            builder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
 
             builder.AddDefaultValueModelBuilder();
         }

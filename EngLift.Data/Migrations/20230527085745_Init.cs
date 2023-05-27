@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -13,20 +14,18 @@ namespace EngLift.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Lessons",
+                name: "Courses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Author = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Desciption = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Prior = table.Column<int>(type: "int", nullable: true),
-                    Viewed = table.Column<int>(type: "int", nullable: true),
                     Image = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -36,7 +35,7 @@ namespace EngLift.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lessons", x => x.Id);
+                    table.PrimaryKey("PK_Courses", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -45,6 +44,7 @@ namespace EngLift.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Group = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -63,12 +63,22 @@ namespace EngLift.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    FullName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RefCode = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TYPE_LOGIN = table.Column<int>(type: "int", nullable: false),
+                    OAuthId = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     UpdatedBy = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsAdmin = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
+                    Deleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -117,6 +127,7 @@ namespace EngLift.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Position = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -127,6 +138,41 @@ namespace EngLift.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Words", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Lessons",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Author = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Desciption = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Prior = table.Column<int>(type: "int", nullable: true),
+                    Viewed = table.Column<int>(type: "int", nullable: true),
+                    Image = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
+                    CourseId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lessons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lessons_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -206,12 +252,13 @@ namespace EngLift.Data.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     RoleId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_UserRoles", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserRoles_Roles_RoleId",
                         column: x => x.RoleId,
@@ -255,12 +302,13 @@ namespace EngLift.Data.Migrations
                 name: "LessonWords",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     LessonId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     WordId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LessonWords", x => new { x.LessonId, x.WordId });
+                    table.PrimaryKey("PK_LessonWords", x => x.Id);
                     table.ForeignKey(
                         name: "FK_LessonWords_Lessons_LessonId",
                         column: x => x.LessonId,
@@ -275,6 +323,16 @@ namespace EngLift.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lessons_CourseId",
+                table: "Lessons",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LessonWords_LessonId",
+                table: "LessonWords",
+                column: "LessonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LessonWords_WordId",
@@ -306,6 +364,11 @@ namespace EngLift.Data.Migrations
                 name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_UserId",
+                table: "UserRoles",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -350,6 +413,9 @@ namespace EngLift.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
         }
     }
 }

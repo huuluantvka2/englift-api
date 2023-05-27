@@ -19,6 +19,48 @@ namespace EngLift.Data.Migrations
                 .HasAnnotation("ProductVersion", "6.0.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("EngLift.Model.Entities.Course", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Desciption")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int?>("Prior")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses", (string)null);
+                });
+
             modelBuilder.Entity("EngLift.Model.Entities.Identity.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -28,6 +70,9 @@ namespace EngLift.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Group")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -217,15 +262,21 @@ namespace EngLift.Data.Migrations
 
             modelBuilder.Entity("EngLift.Model.Entities.Identity.UserRole", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("char(36)");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles", (string)null);
                 });
@@ -264,6 +315,9 @@ namespace EngLift.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -297,18 +351,26 @@ namespace EngLift.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Lessons", (string)null);
                 });
 
             modelBuilder.Entity("EngLift.Model.Entities.LessonWord", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid>("LessonId")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("WordId")
                         .HasColumnType("char(36)");
 
-                    b.HasKey("LessonId", "WordId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("LessonId");
 
                     b.HasIndex("WordId");
 
@@ -404,17 +466,21 @@ namespace EngLift.Data.Migrations
 
             modelBuilder.Entity("EngLift.Model.Entities.Identity.UserRole", b =>
                 {
-                    b.HasOne("EngLift.Model.Entities.Identity.Role", null)
-                        .WithMany()
+                    b.HasOne("EngLift.Model.Entities.Identity.Role", "Role")
+                        .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EngLift.Model.Entities.Identity.User", null)
-                        .WithMany()
+                    b.HasOne("EngLift.Model.Entities.Identity.User", "User")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EngLift.Model.Entities.Identity.UserToken", b =>
@@ -424,6 +490,15 @@ namespace EngLift.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Lesson", b =>
+                {
+                    b.HasOne("EngLift.Model.Entities.Course", "Course")
+                        .WithMany("Lessons")
+                        .HasForeignKey("CourseId");
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("EngLift.Model.Entities.LessonWord", b =>
@@ -443,6 +518,21 @@ namespace EngLift.Data.Migrations
                     b.Navigation("Lesson");
 
                     b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Course", b =>
+                {
+                    b.Navigation("Lessons");
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Identity.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Identity.User", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

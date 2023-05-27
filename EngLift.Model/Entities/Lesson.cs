@@ -26,5 +26,8 @@ namespace EngLift.Model.Entities
         public string? Image { get; set; }
         public bool Active { get; set; } = true;
 
+        public Guid? CourseId { set; get; }
+        [ForeignKey("CourseId")]
+        public virtual Course Course { get; set; }
     }
 }

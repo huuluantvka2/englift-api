@@ -1069,3 +1069,121 @@ LIMIT 2
 2023-05-26 17:35:59 WRN] AuthService -> LoginUser ->$INCORRECT_PASSWORD
 2023-05-26 17:35:59 INF] AuthController -> LoginUser Throw Exception: INCORRECT_PASSWORD
 2023-05-26 17:35:59 INF] Request finished HTTP/2 POST https://localhost:7228/Api/v1/Auths/Signin application/json 60 - 404 - application/json;+charset=utf-8 289.0374ms
+2023-05-26 19:04:23 INF] Now listening on: https://localhost:7228
+2023-05-26 19:04:23 INF] Now listening on: http://localhost:5139
+2023-05-26 19:04:23 INF] Application started. Press Ctrl+C to shut down.
+2023-05-26 19:04:23 INF] Hosting environment: Development
+2023-05-26 19:04:23 INF] Content root path: C:\Users\huulu\source\repos\Core\EngLift\EngLift.WebAPI\
+2023-05-26 19:04:24 INF] Request starting HTTP/2 GET https://localhost:7228/swagger/index.html - -
+2023-05-26 19:04:24 INF] Request finished HTTP/2 GET https://localhost:7228/swagger/index.html - - - 200 - text/html;charset=utf-8 267.5400ms
+2023-05-26 19:04:24 INF] Request starting HTTP/2 GET https://localhost:7228/_vs/browserLink - -
+2023-05-26 19:04:24 INF] Request starting HTTP/2 GET https://localhost:7228/_framework/aspnetcore-browser-refresh.js - -
+2023-05-26 19:04:24 INF] Request finished HTTP/2 GET https://localhost:7228/_framework/aspnetcore-browser-refresh.js - - - 200 11998 application/javascript;+charset=utf-8 7.6330ms
+2023-05-26 19:04:24 INF] Request finished HTTP/2 GET https://localhost:7228/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 23.6484ms
+2023-05-26 19:04:24 INF] Request starting HTTP/2 GET https://localhost:7228/swagger/v1/swagger.json - -
+2023-05-26 19:04:24 INF] Request finished HTTP/2 GET https://localhost:7228/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 132.3632ms
+2023-05-26 19:04:36 INF] Request starting HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - -
+2023-05-26 19:04:37 INF] UserService -> GetAllUser with query {"Limit":10,"Page":1,"Search":null,"Sort":null}
+2023-05-26 19:04:38 WRN] The 'bool' property 'Active' on entity type 'User' is configured with a database-generated default. This default will always be used for inserts when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead, so that the default will only be used for inserts when the property value is 'null'.
+2023-05-26 19:04:38 WRN] The 'bool' property 'Active' on entity type 'Lesson' is configured with a database-generated default. This default will always be used for inserts when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead, so that the default will only be used for inserts when the property value is 'null'.
+2023-05-26 19:04:38 WRN] The 'bool' property 'Active' on entity type 'Word' is configured with a database-generated default. This default will always be used for inserts when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead, so that the default will only be used for inserts when the property value is 'null'.
+2023-05-26 19:04:38 INF] Entity Framework Core 6.0.16 initialized 'BuildDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.0.33-mysql 
+2023-05-26 19:04:40 INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+2023-05-26 19:04:40 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-05-26 19:04:40 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2023-05-26 19:04:40 INF] Executed DbCommand (114ms) [Parameters=[@__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Active`, `u`.`CreatedAt`, `u`.`CreatedBy`, `u`.`Deleted` AS `Deteted`, `u`.`Email`, `u`.`FullName`, `u`.`OAuthId`, `u`.`PhoneNumber`, `u`.`RefCode`, `u`.`TYPE_LOGIN` AS `TypeLogin`, `u`.`UpdatedAt`, `u`.`UpdatedBy`
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+LIMIT @__p_2 OFFSET @__p_1
+2023-05-26 19:04:40 INF] UserService -> GetAllUser successfully 
+2023-05-26 19:04:40 INF] Request finished HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - - - 200 - application/json;+charset=utf-8 4193.2320ms
+2023-05-26 19:05:56 INF] Request starting HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - -
+2023-05-26 19:05:56 INF] UserService -> GetAllUser with query {"Limit":10,"Page":1,"Search":null,"Sort":null}
+2023-05-26 19:05:56 INF] Entity Framework Core 6.0.16 initialized 'BuildDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.0.33-mysql 
+2023-05-26 19:05:56 INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+2023-05-26 19:05:56 INF] Executed DbCommand (42ms) [Parameters=[@__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Active`, `u`.`CreatedAt`, `u`.`CreatedBy`, `u`.`Deleted` AS `Deteted`, `u`.`Email`, `u`.`FullName`, `u`.`OAuthId`, `u`.`PhoneNumber`, `u`.`RefCode`, `u`.`TYPE_LOGIN` AS `TypeLogin`, `u`.`UpdatedAt`, `u`.`UpdatedBy`
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+LIMIT @__p_2 OFFSET @__p_1
+2023-05-26 19:05:56 INF] UserService -> GetAllUser successfully 
+2023-05-26 19:05:56 INF] Request finished HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - - - 200 - application/json;+charset=utf-8 327.2080ms
+2023-05-26 19:05:58 INF] Request starting HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - -
+2023-05-26 19:05:58 INF] UserService -> GetAllUser with query {"Limit":10,"Page":1,"Search":null,"Sort":null}
+2023-05-26 19:05:58 INF] Entity Framework Core 6.0.16 initialized 'BuildDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.0.33-mysql 
+2023-05-26 19:05:58 INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+2023-05-26 19:05:58 INF] Executed DbCommand (49ms) [Parameters=[@__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Active`, `u`.`CreatedAt`, `u`.`CreatedBy`, `u`.`Deleted` AS `Deteted`, `u`.`Email`, `u`.`FullName`, `u`.`OAuthId`, `u`.`PhoneNumber`, `u`.`RefCode`, `u`.`TYPE_LOGIN` AS `TypeLogin`, `u`.`UpdatedAt`, `u`.`UpdatedBy`
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+LIMIT @__p_2 OFFSET @__p_1
+2023-05-26 19:05:58 INF] UserService -> GetAllUser successfully 
+2023-05-26 19:05:58 INF] Request finished HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - - - 200 - application/json;+charset=utf-8 312.7753ms
+2023-05-26 19:05:59 INF] Request starting HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - -
+2023-05-26 19:05:59 INF] UserService -> GetAllUser with query {"Limit":10,"Page":1,"Search":null,"Sort":null}
+2023-05-26 19:05:59 INF] Entity Framework Core 6.0.16 initialized 'BuildDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.0.33-mysql 
+2023-05-26 19:05:59 INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+2023-05-26 19:06:00 INF] Executed DbCommand (49ms) [Parameters=[@__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Active`, `u`.`CreatedAt`, `u`.`CreatedBy`, `u`.`Deleted` AS `Deteted`, `u`.`Email`, `u`.`FullName`, `u`.`OAuthId`, `u`.`PhoneNumber`, `u`.`RefCode`, `u`.`TYPE_LOGIN` AS `TypeLogin`, `u`.`UpdatedAt`, `u`.`UpdatedBy`
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+LIMIT @__p_2 OFFSET @__p_1
+2023-05-26 19:06:00 INF] UserService -> GetAllUser successfully 
+2023-05-26 19:06:00 INF] Request finished HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - - - 200 - application/json;+charset=utf-8 292.0819ms
+2023-05-26 19:06:01 INF] Request starting HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - -
+2023-05-26 19:06:01 INF] UserService -> GetAllUser with query {"Limit":10,"Page":1,"Search":null,"Sort":null}
+2023-05-26 19:06:01 INF] Entity Framework Core 6.0.16 initialized 'BuildDbContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.2' with options: ServerVersion 8.0.33-mysql 
+2023-05-26 19:06:01 INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+2023-05-26 19:06:01 INF] Executed DbCommand (48ms) [Parameters=[@__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`Id`, `u`.`Active`, `u`.`CreatedAt`, `u`.`CreatedBy`, `u`.`Deleted` AS `Deteted`, `u`.`Email`, `u`.`FullName`, `u`.`OAuthId`, `u`.`PhoneNumber`, `u`.`RefCode`, `u`.`TYPE_LOGIN` AS `TypeLogin`, `u`.`UpdatedAt`, `u`.`UpdatedBy`
+FROM `Users` AS `u`
+WHERE CASE
+    WHEN NOT (`u`.`Deleted`) AND (`u`.`IsAdmin` = FALSE) THEN TRUE
+    ELSE ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`FullName`)) > 0)) OR ((NULL LIKE '') OR (LOCATE(NULL, LOWER(`u`.`Email`)) > 0))
+END
+LIMIT @__p_2 OFFSET @__p_1
+2023-05-26 19:06:01 INF] UserService -> GetAllUser successfully 
+2023-05-26 19:06:01 INF] Request finished HTTP/2 GET https://localhost:7228/Api/v1/Users/Admin/Users?Limit=10&Page=1 - - - 200 - application/json;+charset=utf-8 296.7107ms

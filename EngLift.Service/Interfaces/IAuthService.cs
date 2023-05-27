@@ -1,4 +1,4 @@
-﻿using EngLift.DTO.Base;
+﻿using EngLift.DTO.Response;
 using EngLift.DTO.User;
 
 namespace EngLift.Service.Interfaces

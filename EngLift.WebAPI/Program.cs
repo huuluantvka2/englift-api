@@ -3,15 +3,18 @@ using EngLift.Data.Extension;
 using EngLift.DTO.User;
 using EngLift.Sercurity;
 using EngLift.Service.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
 
 #region MYSQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -43,7 +46,54 @@ services.AddLogging(loggingBuilder =>
 });
 #endregion
 #region Identity
-services.AddIdentityFrameworkCoreExtension();
+services.AddIdentityFrameworkCore();
+services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    var Key = Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]);
+    o.SaveToken = true;
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Key)
+    };
+});
+
+services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Eng Word Sync API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer",
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer",
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 #endregion
 
 var app = builder.Build();
@@ -74,6 +124,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

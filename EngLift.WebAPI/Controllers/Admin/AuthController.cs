@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EngLift.WebAPI.Controllers.Admin
 {
+
     [ApiController]
     [Route("Api/v1/[controller]s/Admin")]
     public class AuthController : ControllerApiBase<AuthController>

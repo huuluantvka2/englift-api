@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EngLift.Model\EngLift.Model.csproj" />
+  </ItemGroup>
+
 </Project>
