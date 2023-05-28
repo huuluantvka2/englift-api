@@ -10,5 +10,7 @@
         public static string UNAUTHORIZED = "UNAUTHORIZED";
         public static string FORBIDDEN = "FORBIDDEN";
         public static string USER_IS_DELETED = "USER_IS_DELETED";
+        public static string NOT_FOUND_COURSE = "NOT_FOUND_COURSE";
+        public static string NOT_FOUND_LESSON = "NOT_FOUND_LESSON";
     }
 }
