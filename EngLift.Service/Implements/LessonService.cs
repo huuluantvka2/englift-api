@@ -80,7 +80,7 @@ namespace EngLift.Service.Implements
             }).FirstOrDefaultAsync();
             if (entity == null)
             {
-                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
             }
 
             _logger.LogInformation($"LessonService -> GetLessonDetail with request successfully");

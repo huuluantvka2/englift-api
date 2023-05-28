@@ -30,5 +30,7 @@ namespace EngLift.Model.Entities
         [MaxLength(50)]
         public string? Position { get; set; }
         public bool Active { get; set; } = true;
+
+        public ICollection<LessonWord> LessonWords { get; set; }
     }
 }

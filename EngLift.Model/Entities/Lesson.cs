@@ -29,5 +29,6 @@ namespace EngLift.Model.Entities
         public Guid? CourseId { set; get; }
         [ForeignKey("CourseId")]
         public virtual Course Course { get; set; }
+        public ICollection<LessonWord> LessonWords { get; set; }
     }
 }
