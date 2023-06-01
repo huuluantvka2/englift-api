@@ -116,11 +116,15 @@ if (bool.Parse(builder.Configuration["SeedData"]) == true)
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/*if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+}*/
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 //global handle error
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
