@@ -8576,11 +8576,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
       "projectName": "EngLift.UnitTest",
-      "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
+      "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
       "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.UnitTest\\obj\\",
+      "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -8597,11 +8597,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Service\\EngLift.Service.csproj": {
-              "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.Service\\EngLift.Service.csproj"
+            "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+              "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
             },
-            "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
-              "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.WebAPI\\EngLift.WebAPI.csproj"
+            "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
+              "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj"
             }
           }
         }
