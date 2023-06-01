@@ -1,9 +1,188 @@
-﻿
+﻿using EngLift.Common;
+using EngLift.Data.Infrastructure.Interfaces;
+using EngLift.DTO.Base;
+using EngLift.DTO.Response;
+using EngLift.DTO.Word;
+using EngLift.Model.Entities;
+using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace EngLift.Service.Implements
 {
-    public class WordService : IWordService
+    public class WordService : ServiceBase<WordService>, IWordService
     {
+        private IDictionaryService _dictionaryService { get; set; }
+        public WordService(ILogger<WordService> logger, IUnitOfWork unitOfWork, IDictionaryService dictionaryService) : base(logger, unitOfWork)
+        {
+            _dictionaryService = dictionaryService;
+        }
+        public async Task<DataList<WordItemDTO>> GetAllWordByLessonId(Guid LessonId, BaseRequest request)
+        {
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {LessonId}");
+            var result = new DataList<WordItemDTO>();
+            IQueryable<Word> query = UnitOfWork.WordsRepo.GetAll()
+                .Where(x =>
+                x.LessonWords.Any(y => y.LessonId == LessonId) &&
+                String.IsNullOrEmpty(request.Search) ? true :
+                    (x.Content.ToLower().Contains(request.Search) || x.Trans.ToLower().Contains(request.Search))
+                )
+                .Include(x => x.LessonWords);
+
+            result.TotalRecord = query.Count();
+            if (request.Sort != null)
+            {
+                switch (request.Sort)
+                {
+                    case 1: query = query.OrderBy(x => x.CreatedAt); break;
+                    case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                }
+            }
+            else query = query.OrderByDescending(x => x.CreatedAt);
+
+            var data = await query.Select(x => new WordItemDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Audio = x.Audio,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Content = x.Content,
+                Example = x.Example,
+                UpdatedAt = x.UpdatedAt,
+                UpdatedBy = x.UpdatedBy,
+                Active = x.Active,
+                Phonetic = x.Phonetic,
+                Trans = x.Trans,
+                Position = x.Position
+            }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
+
+            result.Items = data;
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId LessonId {LessonId} successfully");
+            return result;
+        }
+
+        public async Task<WordItemDTO> GetWordDetail(Guid Id)
+        {
+            _logger.LogInformation($"WordService -> GetWordDetail with id {JsonConvert.SerializeObject(Id)}");
+            var entity = await UnitOfWork.WordsRepo.GetAll().Where(x => x.Id == Id).Select(x => new WordItemDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Audio = x.Audio,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Content = x.Content,
+                Example = x.Example,
+                UpdatedAt = x.UpdatedAt,
+                UpdatedBy = x.UpdatedBy,
+                Active = x.Active,
+                Phonetic = x.Phonetic,
+                Trans = x.Trans,
+                Position = x.Position
+            }).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+            }
+
+            _logger.LogInformation($"WordService -> GetWordDetail with request successfully");
+            return entity;
+        }
+
+
+        public async Task<SingleId> CreateWord(WordCreateDTO dto)
+        {
+            _logger.LogInformation($"WordService -> CreateWord with dto {JsonConvert.SerializeObject(dto)}");
+
+            var wordDB = UnitOfWork.WordsRepo.GetAll().Where(x => x.Content == dto.Content && x.Trans == dto.Trans).Include(x => x.LessonWords).FirstOrDefault();
+            Word? word = null;
+            if (wordDB == null)
+            {
+                var existLesson = UnitOfWork.LessonsRepo.GetAll().Any(x => x.Id == dto.LessonId);
+                if (!existLesson)
+                {
+                    throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_COURSE);
+                }
+                word = new Word()
+                {
+                    Id = Guid.NewGuid(),
+                    Image = dto.Image,
+                    Content = dto.Content,
+                    Example = dto.Example,
+                    Active = dto.Active,
+                    Phonetic = dto.Phonetic,
+                    Trans = dto.Trans,
+                    Position = dto.Position,
+                };
+                word.LessonWords = new List<LessonWord>() {
+                    new LessonWord() { LessonId=dto.LessonId,WordId = word.Id}
+                };
+
+                var audio = await _dictionaryService.GetLinkAudio(dto.Content);
+                if (!string.IsNullOrEmpty(audio)) word.Audio = audio;
+                UnitOfWork.WordsRepo.Insert(word);
+
+                await UnitOfWork.SaveChangesAsync();
+
+                _logger.LogInformation($"WordService -> CreateWord successfully");
+                return new SingleId() { Id = word.Id };
+            }
+            else
+            {
+                if (!wordDB.LessonWords.Any(x => x.LessonId == dto.LessonId))
+                {
+                    wordDB.LessonWords.Add(new LessonWord() { LessonId = dto.LessonId, WordId = word.Id });
+                    UnitOfWork.WordsRepo.Update(word);
+                    await UnitOfWork.SaveChangesAsync();
+                }
+                return new SingleId() { Id = wordDB.Id };
+            }
+
+
+        }
+
+        public async Task<SingleId> UpdateWord(Guid Id, WordUpdateDTO dto)
+        {
+            _logger.LogInformation($"WordService -> UpdateWord with dto {JsonConvert.SerializeObject(dto)}");
+            var entity = UnitOfWork.WordsRepo.GetById(Id);
+            if (entity == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+            }
+            entity.Image = dto.Image;
+            entity.Content = dto.Content;
+            entity.Image = dto.Image;
+            entity.Example = dto.Example;
+            entity.Active = dto.Active;
+            entity.Phonetic = dto.Phonetic;
+            entity.Trans = dto.Trans;
+            entity.Position = dto.Position;
+
+            UnitOfWork.WordsRepo.Update(entity);
+            await UnitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation($"WordService -> UpdateWord successfully");
+            return new SingleId() { Id = Id };
+        }
+
+        public async Task<SingleId> DeleteWord(Guid Id)
+        {
+            _logger.LogInformation($"WordService -> DeleteWord with id {JsonConvert.SerializeObject(Id)}");
+            var entity = UnitOfWork.WordsRepo.GetById(Id);
+            if (entity == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+            }
+
+            UnitOfWork.WordsRepo.Delete(entity);
+            await UnitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation($"WordService -> AdminDeleteUser successfully");
+            return new SingleId() { Id = Id };
+        }
     }
 }

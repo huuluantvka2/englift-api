@@ -31,7 +31,7 @@ namespace EngLift.Data
             var entityTypes = builder.Model.GetEntityTypes();
             foreach (var entityType in entityTypes)
                 builder.Entity(entityType.ClrType)
-                       .ToTable(entityType.GetTableName().Replace("AspNet", ""));
+                        .ToTable(entityType.GetTableName().Replace("AspNet", ""));
 
             builder.Entity<UserRole>().HasKey(x => x.Id);
             builder.Entity<UserRole>()

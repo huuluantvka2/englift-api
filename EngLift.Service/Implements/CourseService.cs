@@ -24,7 +24,12 @@ namespace EngLift.Service.Implements
         {
             _logger.LogInformation($"CourseService -> GetAllCourse with request {JsonConvert.SerializeObject(request)}");
             var result = new DataList<CourseItemDTO>();
-            IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll().Include(x => x.Lessons);
+            IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
+                .Where(x => String.IsNullOrEmpty(request.Search) ? true :
+                        (
+                        x.Name.ToLower().Contains(request.Search)
+                        ))
+                .Include(x => x.Lessons);
 
             result.TotalRecord = query.Count();
             query = query.OrderByDescending(x => x.Prior);
