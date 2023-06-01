@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4GHs8U3RgbrOjw9Zo/bT6YzqVVBBe5MT/esNnJK/RCXq7PI2+BtgeWpfPSosHmxkI4u4Mi8js2/YtHvIBYvHlA==",
+  "dgSpecHash": "lMO0m99dhFZ1Jm3n5Od+PYk9+ueOnJCZhClvcExavEPEYv7w6J8D2lIChK3510HVH6HEp2lapieyQyLT2WxP/w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\huulu\\source\\repos\\Core\\EngLift\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
+  "projectFilePath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huulu\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
