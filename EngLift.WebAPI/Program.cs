@@ -96,6 +96,18 @@ services.AddSwaggerGen(option =>
 });
 #endregion
 
+#region Cors
+services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificDomain",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://learn.canbantot.com")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+#endregion
 var app = builder.Build();
 
 #region Seed Data
@@ -124,7 +136,7 @@ if (bool.Parse(builder.Configuration["SeedData"]) == true)
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors();
 //global handle error
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
