@@ -136,7 +136,7 @@ if (bool.Parse(builder.Configuration["SeedData"]) == true)
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors();
+app.UseCors("AllowSpecificDomain");
 //global handle error
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
