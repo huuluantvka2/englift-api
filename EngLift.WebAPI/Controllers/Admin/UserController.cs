@@ -24,7 +24,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             _userService = userService;
         }
 
-        [HttpGet("Users")]
+        [HttpGet("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_USER)]
         public async Task<IActionResult> GetAllUser([FromQuery] BaseRequest request)
         {
@@ -40,7 +40,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPut("Users/{Id}")]
+        [HttpPut("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_USER)]
         public async Task<IActionResult> AdminUpdateUser(Guid Id, [FromBody] UserAdminUpdateDTO dto)
         {
@@ -56,7 +56,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpDelete("Users/{Id}")]
+        [HttpDelete("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_USER)]
         public async Task<IActionResult> AdminDeleteUser(Guid Id)
         {
