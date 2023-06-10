@@ -23,14 +23,19 @@ namespace EngLift.Service.Extensions
                 var response = context.Response;
                 response.ContentType = "application/json";
 
-                var resut = new ResponseData()
+                var result = new ResponseData()
                 {
                     Data = null,
                     Message = error.Message,
                     StatusCode = (HttpStatusCode)(error.Data["StatusCode"] ?? HttpStatusCode.BadGateway)
                 };
-                response.StatusCode = (int)resut.StatusCode;
-                await response.WriteAsync(JsonSerializer.Serialize(resut));
+
+                var options = new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                };
+
+                await response.WriteAsync(JsonSerializer.Serialize(result, options));
             }
         }
     }
