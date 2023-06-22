@@ -1,4 +1,5 @@
-﻿using EngLift.DTO.Course;
+﻿using EngLift.DTO.Base;
+using EngLift.DTO.Course;
 using EngLift.DTO.Response;
 using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Admin;
@@ -27,7 +28,7 @@ namespace EngLift.UnitTest.ControllerTest
         public async Task GetAllCourse_Returns_Success()
         {
             // Arrange
-            var request = new CourseRequest();
+            var request = new BaseRequest();
             var expectDataList = new DataList<CourseItemDTO>
             {
                 Items = new List<CourseItemDTO> {
