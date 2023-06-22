@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.101.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
@@ -27,6 +28,13 @@
     <ProjectReference Include="..\EngLift.Data\EngLift.Data.csproj" />
     <ProjectReference Include="..\EngLift.Sercurity\EngLift.Sercurity.csproj" />
     <ProjectReference Include="..\EngLift.Service\EngLift.Service.csproj" />
+    <ProjectReference Include="..\ImportWordWorker\ImportWordWorker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\uploads\courses\" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ namespace EngLift.DTO.Lesson
     {
         public string Name { get; set; }
         public string? Author { get; set; }
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int? Prior { get; set; } = 0;
         public string? Image { get; set; }
         public bool Active { get; set; } = true;
@@ -17,7 +17,7 @@ namespace EngLift.DTO.Lesson
     {
         public string Name { get; set; }
         public string? Author { get; set; }
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int? Prior { get; set; } = 0;
         public string? Image { get; set; }
         public bool Active { get; set; } = true;
@@ -27,8 +27,9 @@ namespace EngLift.DTO.Lesson
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string? Author { get; set; }
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int? Prior { get; set; } = 0;
+        public int TotalWords { get; set; } = 0;
         public int? Viewed { get; set; } = 0;
         public string? Image { get; set; }
         public bool Active { get; set; } = true;

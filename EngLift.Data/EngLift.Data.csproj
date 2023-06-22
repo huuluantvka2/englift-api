@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Cloud.PubSub.V1" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
@@ -19,6 +20,10 @@
     <ProjectReference Include="..\EngLift.Common\EngLift.Common.csproj" />
     <ProjectReference Include="..\EngLift.DTO\EngLift.DTO.csproj" />
     <ProjectReference Include="..\EngLift.Model\EngLift.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -24,8 +24,10 @@ namespace EngLift.Service.Implements
             _logger.LogInformation($"LessonService -> GetAllLessonByCourseId with request {JsonConvert.SerializeObject(request)} and CourseId {CourseId}");
             var result = new DataList<LessonItemDTO>();
             IQueryable<Lesson> query = UnitOfWork.LessonsRepo.GetAll()
-                .Where(x => x.CourseId == CourseId && String.IsNullOrEmpty(request.Search) ? true : x.Name.ToLower().Contains(request.Search))
-                .Include(x => x.Course);
+                .Where(x => x.CourseId == CourseId &&
+                (String.IsNullOrEmpty(request.Search) ? true : x.Name.ToLower().Contains(request.Search)) &&
+                (request.Active == null || x.Active == (bool)request.Active)
+                ).Include(x => x.LessonWords);
 
             result.TotalRecord = query.Count();
             query = query.OrderByDescending(x => x.Prior);
@@ -35,6 +37,12 @@ namespace EngLift.Service.Implements
                 {
                     case 1: query = query.OrderBy(x => x.CreatedAt); break;
                     case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.LessonWords.Count); break;
+                    case 4: query = query.OrderByDescending(x => x.LessonWords.Count); break;
+                    case 5: query = query.OrderBy(x => x.Prior); break;
+                    case 6: query = query.OrderByDescending(x => x.Prior); break;
+                    case 7: query = query.OrderBy(x => x.UpdatedAt); break;
+                    case 8: query = query.OrderByDescending(x => x.UpdatedAt); break;
                 }
             }
             var data = await query.Select(x => new LessonItemDTO
@@ -44,7 +52,7 @@ namespace EngLift.Service.Implements
                 Prior = x.Prior,
                 CreatedAt = x.CreatedAt,
                 CreatedBy = x.CreatedBy,
-                Desciption = x.Desciption,
+                Description = x.Description,
                 Name = x.Name,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
@@ -52,6 +60,7 @@ namespace EngLift.Service.Implements
                 CourseId = (Guid)x.CourseId,
                 Author = x.Author,
                 Viewed = x.Viewed,
+                TotalWords = x.LessonWords.Count()
             }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
 
             result.Items = data;
@@ -69,7 +78,7 @@ namespace EngLift.Service.Implements
                 Prior = x.Prior,
                 CreatedAt = x.CreatedAt,
                 CreatedBy = x.CreatedBy,
-                Desciption = x.Desciption,
+                Description = x.Description,
                 Name = x.Name,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
@@ -101,7 +110,7 @@ namespace EngLift.Service.Implements
             {
                 Id = Guid.NewGuid(),
                 Active = true,
-                Desciption = dto.Desciption,
+                Description = dto.Description,
                 Image = dto.Image,
                 Name = dto.Name,
                 Prior = dto.Prior ?? 1,
@@ -126,7 +135,7 @@ namespace EngLift.Service.Implements
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
             }
             entity.Prior = dto.Prior;
-            entity.Desciption = dto.Desciption;
+            entity.Description = dto.Description;
             entity.Image = dto.Image;
             entity.Name = dto.Name;
             entity.Active = dto.Active;

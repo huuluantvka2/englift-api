@@ -29,7 +29,9 @@ namespace EngLift.Sercurity.Authorization
             else
             {
                 Guid userId = Guid.Parse(context.User.FindFirstValue("UserId"));
-                bool found = _unitOfWork.UserRolesRepo.GetAll().Any(x => x.UserId == userId && requirement.AllowedRoles.Any(y => y == x.Role.Name));
+                var roles = context.User.FindFirst(ClaimTypes.Role).Value;
+                bool found = requirement.AllowedRoles.Any(x => roles.Contains(x));
+                //bool found = _unitOfWork.UserRolesRepo.GetAll().Any(x => x.UserId == userId && requirement.AllowedRoles.Any(y => y == x.Role.Name));
                 if (found) context.Succeed(requirement);
                 else throw new ServiceExeption(HttpStatusCode.Forbidden, ErrorMessage.FORBIDDEN);
             }

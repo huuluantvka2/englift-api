@@ -1,5 +1,6 @@
-﻿using EngLift.Common;
-using EngLift.DTO.Base;
+﻿using ClosedXML.Excel;
+using EngLift.Common;
+using EngLift.Data.Infrastructure.Interfaces;
 using EngLift.DTO.Response;
 using EngLift.DTO.Word;
 using EngLift.Service.Extensions;
@@ -7,6 +8,7 @@ using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace EngLift.WebAPI.Controllers.Admin
 {
@@ -16,21 +18,24 @@ namespace EngLift.WebAPI.Controllers.Admin
     public class WordController : ControllerApiBase<WordController>
     {
         private readonly IWordService _wordService;
+        private IGooglePublisher _publisherService;
         public WordController(
             ILogger<WordController> logger,
-            IWordService wordService
+            IWordService wordService,
+            IGooglePublisherFactory factory
             ) : base(logger)
         {
             _wordService = wordService;
+            _publisherService = factory.Init(GoogleConstant.PubSubTopicImport);
         }
 
-        [HttpGet("Lesson/{Id}/Words")]
+        [HttpGet("Lesson")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_WORD)]
-        public async Task<IActionResult> GetAllWordByLessonId(Guid Id, [FromQuery] BaseRequest request)
+        public async Task<IActionResult> GetAllWordByLessonId([FromQuery] WordRequest request)
         {
             try
             {
-                var result = await _wordService.GetAllWordByLessonId(Id, request);
+                var result = await _wordService.GetAllWordByLessonId(request);
                 return Success<DataList<WordItemDTO>>(result);
             }
             catch (ServiceExeption ex)
@@ -40,7 +45,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpGet("Words/{Id}")]
+        [HttpGet("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_WORD)]
         public async Task<IActionResult> GetWordDetail(Guid Id)
         {
@@ -56,7 +61,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPost("Words")]
+        [HttpPost("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CREATE_VIEW_WORD)]
         public async Task<IActionResult> CreateWord([FromBody] WordCreateDTO dto)
         {
@@ -72,7 +77,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPut("Words/{Id}")]
+        [HttpPut("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_WORD)]
         public async Task<IActionResult> UpdateWord(Guid Id, [FromBody] WordUpdateDTO dto)
         {
@@ -88,13 +93,13 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpDelete("Words/{Id}")]
+        [HttpDelete("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_DELETE_VIEW_WORD)]
-        public async Task<IActionResult> DeleteWord(Guid Id)
+        public async Task<IActionResult> DeleteWord([FromQuery] Guid LessonId, Guid Id)
         {
             try
             {
-                var result = await _wordService.DeleteWord(Id);
+                var result = await _wordService.DeleteWord(Id, LessonId);
                 return Success<SingleId>(result);
             }
             catch (ServiceExeption ex)
@@ -102,6 +107,99 @@ namespace EngLift.WebAPI.Controllers.Admin
                 _logger.LogInformation($"WordController -> DeleteWord Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
+        }
+
+        [HttpPost("Import")]
+        [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CREATE_VIEW_WORD)]
+        public async Task<IActionResult> UploadExcel(IFormFile file)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("File not exist");
+                }
+                List<WordCreateExcelDTO> Words = new List<WordCreateExcelDTO>();
+                using (var workbook = new XLWorkbook(file.OpenReadStream()))
+                {
+                    IXLWorksheet worksheet = workbook.Worksheet(1);
+                    if (worksheet.RowsUsed().Count() > 200)
+                    {
+                        throw new ServiceExeption(HttpStatusCode.BadRequest, "Limit import are 200 record");
+                    }
+                    var count = worksheet.RowsUsed().Count();
+                    for (int i = 2; i <= worksheet.RowsUsed().Count(); i++)
+                    {
+                        var word = new WordCreateExcelDTO();
+                        var Content = worksheet.Cell(i, 1).Value.ToString();
+                        word.Content = Content;
+                        if (String.IsNullOrEmpty(Content)) word.MessageError += "Thiếu từ vựng, ";
+
+                        var Phonetic = worksheet.Cell(i, 2).Value.ToString();
+                        word.Phonetic = Phonetic;
+                        if (String.IsNullOrEmpty(Phonetic)) word.MessageError += "Thiếu phiên âm, ";
+
+                        var Trans = worksheet.Cell(i, 3).Value.ToString();
+                        word.Trans = Trans;
+                        if (String.IsNullOrEmpty(Trans)) word.MessageError += "Thiếu dịch nghĩa, ";
+
+                        var Position = worksheet.Cell(i, 4).Value.ToString();
+                        word.Position = Position;
+                        if (String.IsNullOrEmpty(Position)) word.MessageError += "Thiếu loại từ, ";
+
+                        var Example = worksheet.Cell(i, 5).Value.ToString();
+                        word.Example = Example;
+                        if (String.IsNullOrEmpty(Example)) word.MessageError += "Thiếu ví dụ,";
+                        Words.Add(word);
+
+                        var LessonId = worksheet.Cell(i, 6).Value.ToString();
+                        word.LessonId = LessonId;
+                        if (String.IsNullOrEmpty(LessonId)) word.MessageError += "Thiếu LessonId";
+
+                        worksheet.Cell(i, 7).Value = string.IsNullOrEmpty(word.MessageError) ? "Thành công" : word.MessageError;
+                        if (worksheet.Cell(i, 7).Value.ToString() != "Thành công") worksheet.Cell(i, 7).Style.Fill.BackgroundColor = XLColor.Red;
+                    }
+                    var list = Words.Where(x => String.IsNullOrEmpty(x.MessageError)).ToList();
+                    await _wordService.CheckExistLesson(list);
+                    await _publisherService.SendMessageAsync<List<WordCreateExcelDTO>>(list);
+
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+
+                        return File(
+                            content,
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "WordsImportResult.xlsx");
+                    }
+                }
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"WordController -> UploadExcel Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Delete file
+        /// </summary>
+        [HttpGet("TempleteImport")]
+        public IActionResult DownLoadImportWords()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "excel", "sampleimport.xlsx");
+            // Check if the file exists
+            if (!System.IO.File.Exists(filePath))
+            {
+                return BadRequest("Not found Excel");
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(
+                fileBytes,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "WordSample.xlsx");
         }
     }
 }

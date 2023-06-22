@@ -24,7 +24,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             _courseService = courseService;
         }
 
-        [HttpGet("Courses")]
+        [HttpGet("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_COURSE)]
         public async Task<IActionResult> GetAllCourse([FromQuery] BaseRequest request)
         {
@@ -40,7 +40,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpGet("Courses/{Id}")]
+        [HttpGet("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_COURSE)]
         public async Task<IActionResult> GetCourseDetail(Guid Id)
         {
@@ -56,7 +56,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPost("Courses")]
+        [HttpPost("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CREATE_VIEW_COURSE)]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateDTO dto)
         {
@@ -72,7 +72,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPut("Courses/{Id}")]
+        [HttpPut("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_COURSE)]
         public async Task<IActionResult> UpdateCourse(Guid Id, [FromBody] CourseUpdateDTO dto)
         {
@@ -88,7 +88,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpDelete("Courses/{Id}")]
+        [HttpDelete("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_DELETE_VIEW_COURSE)]
         public async Task<IActionResult> DeleteCourse(Guid Id)
         {

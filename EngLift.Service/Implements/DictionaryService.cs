@@ -11,21 +11,28 @@ namespace EngLift.Service.Implements
 
         public async Task<string?> GetLinkAudio(string word)
         {
-            List<DictionaryItemDTO> dictionarys = new List<DictionaryItemDTO>();
-            using (var httpClient = new HttpClient())
+            try
             {
-                var response = await httpClient.GetAsync($"{BaseUrl}/{word}");
-                string apiResponse = await response.Content.ReadAsStringAsync();
-                dictionarys = JsonConvert.DeserializeObject<List<DictionaryItemDTO>>(apiResponse);
-                foreach (var dictionary in dictionarys)
+                List<DictionaryItemDTO> dictionarys = new List<DictionaryItemDTO>();
+                using (var httpClient = new HttpClient())
                 {
-                    foreach (var phonetic in dictionary.phonetics)
+                    var response = await httpClient.GetAsync($"{BaseUrl}/{word}");
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    dictionarys = JsonConvert.DeserializeObject<List<DictionaryItemDTO>>(apiResponse);
+                    foreach (var dictionary in dictionarys)
                     {
-                        if (!string.IsNullOrEmpty(phonetic.audio)) return phonetic.audio;
+                        foreach (var phonetic in dictionary.phonetics)
+                        {
+                            if (!string.IsNullOrEmpty(phonetic.audio)) return phonetic.audio;
+                        }
                     }
                 }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

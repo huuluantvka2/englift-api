@@ -1,6 +1,5 @@
 ﻿using EngLift.Common;
 using EngLift.Data.Infrastructure.Interfaces;
-using EngLift.DTO.Base;
 using EngLift.DTO.Response;
 using EngLift.DTO.Word;
 using EngLift.Model.Entities;
@@ -20,17 +19,17 @@ namespace EngLift.Service.Implements
         {
             _dictionaryService = dictionaryService;
         }
-        public async Task<DataList<WordItemDTO>> GetAllWordByLessonId(Guid LessonId, BaseRequest request)
+        public async Task<DataList<WordItemDTO>> GetAllWordByLessonId(WordRequest request)
         {
-            _logger.LogInformation($"WordService -> GetAllWordByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {LessonId}");
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {request.LessonId}");
             var result = new DataList<WordItemDTO>();
             IQueryable<Word> query = UnitOfWork.WordsRepo.GetAll()
                 .Where(x =>
-                x.LessonWords.Any(y => y.LessonId == LessonId) &&
-                String.IsNullOrEmpty(request.Search) ? true :
-                    (x.Content.ToLower().Contains(request.Search) || x.Trans.ToLower().Contains(request.Search))
-                )
-                .Include(x => x.LessonWords);
+                (request.LessonId == null ? true : x.LessonWords.Any(y => y.LessonId == request.LessonId)) &&
+                (String.IsNullOrEmpty(request.Search) ? true : (x.Content.ToLower().Contains(request.Search) || x.Trans.ToLower().Contains(request.Search))) &&
+                (request.Active == null || x.Active == (bool)request.Active)
+                );
+            if (request.LessonId != null) query = query.Include(x => x.LessonWords);
 
             result.TotalRecord = query.Count();
             if (request.Sort != null)
@@ -39,6 +38,12 @@ namespace EngLift.Service.Implements
                 {
                     case 1: query = query.OrderBy(x => x.CreatedAt); break;
                     case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.Content); break;
+                    case 4: query = query.OrderByDescending(x => x.Content); break;
+                    case 5: query = query.OrderBy(x => x.Trans); break;
+                    case 6: query = query.OrderByDescending(x => x.Trans); break;
+                    case 7: query = query.OrderBy(x => x.UpdatedAt); break;
+                    case 8: query = query.OrderByDescending(x => x.UpdatedAt); break;
                 }
             }
             else query = query.OrderByDescending(x => x.CreatedAt);
@@ -61,7 +66,7 @@ namespace EngLift.Service.Implements
             }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
 
             result.Items = data;
-            _logger.LogInformation($"WordService -> GetAllWordByLessonId LessonId {LessonId} successfully");
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId LessonId {request.LessonId} successfully");
             return result;
         }
 
@@ -107,6 +112,7 @@ namespace EngLift.Service.Implements
                 {
                     throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_COURSE);
                 }
+
                 word = new Word()
                 {
                     Id = Guid.NewGuid(),
@@ -118,6 +124,7 @@ namespace EngLift.Service.Implements
                     Trans = dto.Trans,
                     Position = dto.Position,
                 };
+
                 word.LessonWords = new List<LessonWord>() {
                     new LessonWord() { LessonId=dto.LessonId,WordId = word.Id}
                 };
@@ -135,8 +142,8 @@ namespace EngLift.Service.Implements
             {
                 if (!wordDB.LessonWords.Any(x => x.LessonId == dto.LessonId))
                 {
-                    wordDB.LessonWords.Add(new LessonWord() { LessonId = dto.LessonId, WordId = word.Id });
-                    UnitOfWork.WordsRepo.Update(word);
+                    var newLessonWord = new LessonWord() { LessonId = dto.LessonId, WordId = wordDB.Id };
+                    UnitOfWork.LessonWordRepo.Insert(newLessonWord);
                     await UnitOfWork.SaveChangesAsync();
                 }
                 return new SingleId() { Id = wordDB.Id };
@@ -152,6 +159,11 @@ namespace EngLift.Service.Implements
             if (entity == null)
             {
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+            }
+            if (entity.Content != dto.Content)
+            {
+                var audio = await _dictionaryService.GetLinkAudio(dto.Content);
+                if (!string.IsNullOrEmpty(audio)) entity.Audio = audio;
             }
             entity.Image = dto.Image;
             entity.Content = dto.Content;
@@ -169,20 +181,45 @@ namespace EngLift.Service.Implements
             return new SingleId() { Id = Id };
         }
 
-        public async Task<SingleId> DeleteWord(Guid Id)
+        public async Task<SingleId> DeleteWord(Guid Id, Guid LessonId)
         {
             _logger.LogInformation($"WordService -> DeleteWord with id {JsonConvert.SerializeObject(Id)}");
-            var entity = UnitOfWork.WordsRepo.GetById(Id);
+            var entity = UnitOfWork.WordsRepo.GetAll().Where(x => x.Id == Id).Include(x => x.LessonWords).FirstOrDefault();
             if (entity == null)
             {
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
             }
 
-            UnitOfWork.WordsRepo.Delete(entity);
+            if (entity.LessonWords.Count() > 1)
+            {
+                var lessonWord = entity.LessonWords.Where(x => x.LessonId == LessonId && x.WordId == Id).FirstOrDefault();
+                if (lessonWord == null)
+                {
+                    throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+                }
+                UnitOfWork.LessonWordRepo.Delete(lessonWord);
+            }
+            else
+            {
+                UnitOfWork.WordsRepo.Delete(entity);
+            }
             await UnitOfWork.SaveChangesAsync();
 
             _logger.LogInformation($"WordService -> AdminDeleteUser successfully");
             return new SingleId() { Id = Id };
+        }
+
+        public async Task<bool> CheckExistLesson(List<WordCreateExcelDTO> list)
+        {
+            _logger.LogInformation($"WordService -> CheckExistLesson with total rows: {list.Count()}");
+            var groups = list.Select(x => x.LessonId).GroupBy(x => x).Select(x => x.Key);
+            //check exist lesssonId
+            foreach (var key in groups)
+            {
+                bool exist = await UnitOfWork.LessonsRepo.GetAll().AnyAsync(x => x.Id == Guid.Parse(key));
+                if (!exist) throw new ServiceExeption(HttpStatusCode.BadRequest, $"Not found lessonId: {key}");
+            }
+            return true;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using EngLift.Common;
 using EngLift.Data.Infrastructure.Interfaces;
-using EngLift.DTO.Base;
 using EngLift.DTO.Response;
 using EngLift.DTO.User;
 using EngLift.Model.Entities.Identity;
@@ -20,14 +19,16 @@ namespace EngLift.Service.Implements
 
         }
 
-        public async Task<DataList<UserItemDTO>> GetAllUser(BaseRequest request)
+        public async Task<DataList<UserItemDTO>> GetAllUser(UserRequest request)
         {
             _logger.LogInformation($"UserService -> GetAllUser with query {JsonConvert.SerializeObject(request)}");
             var result = new DataList<UserItemDTO>();
             IQueryable<User> query = UnitOfWork.UsersRepo.GetAll()
                 .Where(x =>
-                    x.Deleted == false &&
                     x.IsAdmin == false &&
+                    x.Deleted == false &&
+                    (request.Active != null ? x.Active : true) &&
+                    (request.TypeLogin != null ? x.TYPE_LOGIN == request.TypeLogin : true) &&
                     String.IsNullOrEmpty(request.Search) ? true :
                         (
                         x.FullName.ToLower().Contains(request.Search) ||
@@ -41,6 +42,10 @@ namespace EngLift.Service.Implements
                 {
                     case 1: query = query.OrderBy(x => x.CreatedAt); break;
                     case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.Email); break;
+                    case 4: query = query.OrderByDescending(x => x.Email); break;
+                    case 5: query = query.OrderBy(x => x.FullName); break;
+                    case 6: query = query.OrderByDescending(x => x.FullName); break;
                 }
             }
             else query = query.OrderByDescending(x => x.CreatedAt);
@@ -67,6 +72,32 @@ namespace EngLift.Service.Implements
             return result;
         }
 
+        public async Task<UserItemDTO> GetUserById(Guid id)
+        {
+            _logger.LogInformation($"UserService -> GetUserById with Id {id}");
+            var user = await UnitOfWork.UsersRepo.GetAll().Where(x => x.Id == id).Select(x => new UserItemDTO()
+            {
+                Id = x.Id,
+                Active = x.Active,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Deteted = x.Deleted,
+                Email = x.Email,
+                FullName = x.FullName,
+                OAuthId = x.OAuthId,
+                PhoneNumber = x.PhoneNumber,
+                RefCode = x.RefCode,
+                TypeLogin = x.TYPE_LOGIN,
+                UpdatedAt = x.UpdatedAt,
+                UpdatedBy = x.UpdatedBy,
+            }).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
+            }
+            return user;
+        }
+
         public async Task<SingleId> AdminUpdateUser(Guid Id, UserAdminUpdateDTO dto)
         {
             _logger.LogInformation($"UserService -> AdminUpdateUser with dto {JsonConvert.SerializeObject(dto)}");
@@ -82,6 +113,7 @@ namespace EngLift.Service.Implements
             user.RefCode = dto.RefCode;
             user.Active = dto.Active;
             user.FullName = dto.FullName;
+            user.PhoneNumber = dto.PhoneNumber;
 
             UnitOfWork.UsersRepo.Update(user);
             await UnitOfWork.SaveChangesAsync();

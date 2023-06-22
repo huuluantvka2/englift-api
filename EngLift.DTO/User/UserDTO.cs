@@ -1,4 +1,5 @@
-﻿using EngLift.Model.Abstracts;
+﻿using EngLift.DTO.Base;
+using EngLift.Model.Abstracts;
 using EngLift.Model.Entities.Identity;
 
 namespace EngLift.DTO.User
@@ -48,6 +49,13 @@ namespace EngLift.DTO.User
         public string FullName { get; set; }
         public bool Active { get; set; }
         public string? RefCode { get; set; }
+        public string? PhoneNumber { get; set; }
+    }
+
+    public class UserRequest : BaseRequest
+    {
+        public bool? Active { get; set; }
+        public TYPE_LOGIN? TypeLogin { get; set; }
     }
 
 }

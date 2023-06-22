@@ -1,4 +1,5 @@
-﻿using EngLift.Model.Abstracts;
+﻿using EngLift.DTO.Base;
+using EngLift.Model.Abstracts;
 
 namespace EngLift.DTO.Word
 {
@@ -36,4 +37,20 @@ namespace EngLift.DTO.Word
         public string? Position { get; set; }
         public bool Active { get; set; } = true;
     }
+
+    public class WordRequest : BaseRequest
+    {
+        public Guid? LessonId { get; set; }
+    }
+
+    public class WordCreateExcelDTO : WordCreateDTO
+    {
+        public string MessageError { get; set; } = "";
+        public string LessonId { get; set; }
+    }
+    public class WordExcelFile
+    {
+        public string Path { get; set; }
+    }
+
 }

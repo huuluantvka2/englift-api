@@ -19,7 +19,7 @@ namespace EngLift.Model.Entities
         public string? Author { get; set; }
 
         [MaxLength(256)]
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int? Prior { get; set; } = 0; //số càng cao càng xếp lên trước
         public int? Viewed { get; set; } = 0;
         [MaxLength(256)]

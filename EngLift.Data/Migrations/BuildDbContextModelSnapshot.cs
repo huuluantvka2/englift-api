@@ -34,7 +34,7 @@ namespace EngLift.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Desciption")
+                    b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -324,7 +324,7 @@ namespace EngLift.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Desciption")
+                    b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -504,13 +504,13 @@ namespace EngLift.Data.Migrations
             modelBuilder.Entity("EngLift.Model.Entities.LessonWord", b =>
                 {
                     b.HasOne("EngLift.Model.Entities.Lesson", "Lesson")
-                        .WithMany("Lessons")
+                        .WithMany("LessonWords")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EngLift.Model.Entities.Word", "Word")
-                        .WithMany("Lessons")
+                        .WithMany("LessonWords")
                         .HasForeignKey("WordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -537,12 +537,12 @@ namespace EngLift.Data.Migrations
 
             modelBuilder.Entity("EngLift.Model.Entities.Lesson", b =>
                 {
-                    b.Navigation("Lessons");
+                    b.Navigation("LessonWords");
                 });
 
             modelBuilder.Entity("EngLift.Model.Entities.Word", b =>
                 {
-                    b.Navigation("Lessons");
+                    b.Navigation("LessonWords");
                 });
 #pragma warning restore 612, 618
         }

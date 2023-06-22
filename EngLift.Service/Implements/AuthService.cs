@@ -6,6 +6,7 @@ using EngLift.Model.Entities.Identity;
 using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net;
@@ -39,8 +40,9 @@ namespace EngLift.Service.Implements
                 _logger.LogWarning($"AuthService -> LoginAdmin ->${ErrorMessage.INCORRECT_PASSWORD}");
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.INCORRECT_PASSWORD);
             }
-
-            var result = _jwtService.CreateToken(user);
+            List<string> Roles = new List<string>();
+            var roleNames = await UnitOfWork.UserRolesRepo.GetAll().Where(x => x.UserId == user.Id).Include(x => x.Role).Select(x => x.Role.Name).ToListAsync();
+            var result = _jwtService.CreateToken(user, roleNames);
             _logger.LogInformation($"AuthService -> LoginAdmin with data successfully");
             return result;
         }
@@ -98,7 +100,7 @@ namespace EngLift.Service.Implements
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.INCORRECT_PASSWORD);
             }
 
-            var result = _jwtService.CreateToken(user);
+            var result = _jwtService.CreateToken(user, null);
             _logger.LogInformation($"AuthService -> LoginUser with data successfully");
             return result;
         }

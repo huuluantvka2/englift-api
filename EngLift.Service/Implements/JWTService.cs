@@ -2,6 +2,7 @@
 using EngLift.Model.Entities.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,7 +11,7 @@ namespace EngLift.Service.Implements
 {
     public class JwtService
     {
-        private const int EXPIRATION_MINUTES = 120;
+        private const int EXPIRATION_MINUTES = 12000;
 
         private readonly IConfiguration _configuration;
 
@@ -19,12 +20,12 @@ namespace EngLift.Service.Implements
             _configuration = configuration;
         }
 
-        public LoginSuccessDTO CreateToken(User user)
+        public LoginSuccessDTO CreateToken(User user, List<string>? Roles)
         {
             var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
 
             var token = CreateJwtToken(
-                CreateClaims(user),
+                CreateClaims(user, Roles),
                 CreateSigningCredentials(),
                 expiration
             );
@@ -48,7 +49,7 @@ namespace EngLift.Service.Implements
                 signingCredentials: credentials
             );
 
-        private Claim[] CreateClaims(User user) =>
+        private Claim[] CreateClaims(User user, List<string>? Roles) =>
             new[] {
             new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -56,7 +57,8 @@ namespace EngLift.Service.Implements
             new Claim("UserId", user.Id.ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(Roles)),
             };
 
         private SigningCredentials CreateSigningCredentials() =>

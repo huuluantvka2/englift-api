@@ -20,27 +20,30 @@ namespace EngLift.Service.Implements
         {
 
         }
+
         public async Task<DataList<CourseItemDTO>> GetAllCourse(BaseRequest request)
         {
             _logger.LogInformation($"CourseService -> GetAllCourse with request {JsonConvert.SerializeObject(request)}");
             var result = new DataList<CourseItemDTO>();
             IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
-                .Where(x => String.IsNullOrEmpty(request.Search) ? true :
-                        (
-                        x.Name.ToLower().Contains(request.Search)
-                        ))
+                .Where(x => (String.IsNullOrEmpty(request.Search) ? true : x.Name.Contains(request.Search)) && (request.Active == null || x.Active == (bool)request.Active))
                 .Include(x => x.Lessons);
-
             result.TotalRecord = query.Count();
-            query = query.OrderByDescending(x => x.Prior);
             if (request.Sort != null)
             {
                 switch (request.Sort)
                 {
                     case 1: query = query.OrderBy(x => x.CreatedAt); break;
                     case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.Lessons.Count); break;
+                    case 4: query = query.OrderByDescending(x => x.Lessons.Count); break;
+                    case 5: query = query.OrderBy(x => x.Prior); break;
+                    case 6: query = query.OrderByDescending(x => x.Prior); break;
+                    case 7: query = query.OrderBy(x => x.UpdatedAt); break;
+                    case 8: query = query.OrderByDescending(x => x.UpdatedAt); break;
                 }
             }
+            else query = query.OrderByDescending(x => x.Prior);
             var data = await query.Select(x => new CourseItemDTO
             {
                 Id = x.Id,
@@ -48,7 +51,7 @@ namespace EngLift.Service.Implements
                 Prior = x.Prior,
                 CreatedAt = x.CreatedAt,
                 CreatedBy = x.CreatedBy,
-                Desciption = x.Desciption,
+                Description = x.Description,
                 Name = x.Name,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
@@ -58,6 +61,45 @@ namespace EngLift.Service.Implements
 
             result.Items = data;
             _logger.LogInformation($"CourseService -> GetAllCourse with request successfully");
+            return result;
+        }
+
+        public async Task<DataList<CourseItemPublicDTO>> GetAllCorseUser(BaseRequest request)
+        {
+            _logger.LogInformation($"GetAllCorseUser -> GetAllCorseUser with request {JsonConvert.SerializeObject(request)}");
+            var result = new DataList<CourseItemPublicDTO>();
+            IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
+                .Where(x => (String.IsNullOrEmpty(request.Search) ? true : x.Name.Contains(request.Search)) && x.Active == true);
+            result.TotalRecord = query.Count();
+            if (request.Sort != null)
+            {
+                switch (request.Sort)
+                {
+                    case 1: query = query.OrderBy(x => x.CreatedAt); break;
+                    case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.Lessons.Count); break;
+                    case 4: query = query.OrderByDescending(x => x.Lessons.Count); break;
+                    case 5: query = query.OrderBy(x => x.Prior); break;
+                    case 6: query = query.OrderByDescending(x => x.Prior); break;
+                    case 7: query = query.OrderBy(x => x.UpdatedAt); break;
+                    case 8: query = query.OrderByDescending(x => x.UpdatedAt); break;
+                }
+            }
+            else query = query.OrderByDescending(x => x.Prior);
+            var data = await query.Select(x => new CourseItemPublicDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Description = x.Description,
+                Name = x.Name,
+                UpdatedAt = x.UpdatedAt,
+                UpdatedBy = x.UpdatedBy,
+            }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
+
+            result.Items = data;
+            _logger.LogInformation($"GetAllCorseUser -> GetAllCorseUser with request successfully");
             return result;
         }
 
@@ -71,7 +113,7 @@ namespace EngLift.Service.Implements
                 Prior = x.Prior,
                 CreatedAt = x.CreatedAt,
                 CreatedBy = x.CreatedBy,
-                Desciption = x.Desciption,
+                Description = x.Description,
                 Name = x.Name,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
@@ -94,8 +136,8 @@ namespace EngLift.Service.Implements
             Course course = new Course()
             {
                 Id = Guid.NewGuid(),
-                Active = true,
-                Desciption = dto.Desciption,
+                Active = dto.Active,
+                Description = dto.Description,
                 Image = dto.Image,
                 Name = dto.Name,
                 Prior = dto.Prior ?? 1
@@ -117,7 +159,7 @@ namespace EngLift.Service.Implements
                 throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
             }
             entity.Prior = dto.Prior;
-            entity.Desciption = dto.Desciption;
+            entity.Description = dto.Description;
             entity.Image = dto.Image;
             entity.Name = dto.Name;
             entity.Active = dto.Active;
