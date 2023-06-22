@@ -13,6 +13,7 @@ COPY ["EngLift.Model/EngLift.Model.csproj", "EngLift.Model/"]
 COPY ["EngLift.DTO/EngLift.DTO.csproj", "EngLift.DTO/"]
 COPY ["EngLift.Data/EngLift.Data.csproj", "EngLift.Data/"]
 COPY ["EngLift.Common/EngLift.Common.csproj", "EngLift.Common/"]
+COPY ["ImportWordWorker/ImportWordWorker.csproj", "ImportWordWorker/"]
 RUN dotnet restore "EngLift.WebAPI/EngLift.WebAPI.csproj"
 
 COPY . .
