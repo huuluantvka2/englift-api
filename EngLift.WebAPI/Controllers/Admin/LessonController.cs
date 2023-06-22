@@ -24,7 +24,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             _lessonService = lessonService;
         }
 
-        [HttpGet("Course/{Id}/Lessons")]
+        [HttpGet("Course/{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_LESSON)]
         public async Task<IActionResult> GetAllLessonByCourseId(Guid Id, [FromQuery] BaseRequest request)
         {
@@ -40,7 +40,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpGet("Lessons/{Id}")]
+        [HttpGet("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_LESSON)]
         public async Task<IActionResult> GetLessonDetail(Guid Id)
         {
@@ -56,7 +56,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPost("Lessons")]
+        [HttpPost("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CREATE_VIEW_LESSON)]
         public async Task<IActionResult> CreateLesson([FromBody] LessonCreateDTO dto)
         {
@@ -72,7 +72,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpPut("Lessons/{Id}")]
+        [HttpPut("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_EDIT_VIEW_LESSON)]
         public async Task<IActionResult> UpdateLesson(Guid Id, [FromBody] LessonUpdateDTO dto)
         {
@@ -88,7 +88,7 @@ namespace EngLift.WebAPI.Controllers.Admin
             }
         }
 
-        [HttpDelete("Lessons/{Id}")]
+        [HttpDelete("{Id}")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_DELETE_VIEW_LESSON)]
         public async Task<IActionResult> DeleteLesson(Guid Id)
         {

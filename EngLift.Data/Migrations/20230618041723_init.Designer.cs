@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngLift.Data.Migrations
 {
     [DbContext(typeof(BuildDbContext))]
-    [Migration("20230527085745_Init")]
-    partial class Init
+    [Migration("20230618041723_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace EngLift.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Desciption")
+                    b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -326,7 +326,7 @@ namespace EngLift.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Desciption")
+                    b.Property<string>("Description")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -506,13 +506,13 @@ namespace EngLift.Data.Migrations
             modelBuilder.Entity("EngLift.Model.Entities.LessonWord", b =>
                 {
                     b.HasOne("EngLift.Model.Entities.Lesson", "Lesson")
-                        .WithMany()
+                        .WithMany("LessonWords")
                         .HasForeignKey("LessonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EngLift.Model.Entities.Word", "Word")
-                        .WithMany()
+                        .WithMany("LessonWords")
                         .HasForeignKey("WordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -535,6 +535,16 @@ namespace EngLift.Data.Migrations
             modelBuilder.Entity("EngLift.Model.Entities.Identity.User", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Lesson", b =>
+                {
+                    b.Navigation("LessonWords");
+                });
+
+            modelBuilder.Entity("EngLift.Model.Entities.Word", b =>
+                {
+                    b.Navigation("LessonWords");
                 });
 #pragma warning restore 612, 618
         }

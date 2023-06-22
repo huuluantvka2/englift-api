@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EngLift.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace EngLift.Data.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Desciption = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                    Description = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Prior = table.Column<int>(type: "int", nullable: true),
                     Image = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -150,7 +150,7 @@ namespace EngLift.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Author = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Desciption = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                    Description = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Prior = table.Column<int>(type: "int", nullable: true),
                     Viewed = table.Column<int>(type: "int", nullable: true),

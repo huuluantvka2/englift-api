@@ -11,8 +11,8 @@ using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", builder.Configuration["environmentVariables:GOOGLE_APPLICATION_CREDENTIALS"]);
 var services = builder.Services;
-
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 
@@ -57,8 +57,8 @@ services.AddAuthentication(x =>
     o.SaveToken = true;
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
@@ -108,6 +108,10 @@ services.AddCors(options =>
         });
 });
 #endregion
+
+#region Worker Service
+services.AddHostedService<ImportWordWorker.ImportWordWorker>();
+#endregion
 var app = builder.Build();
 
 #region Seed Data
@@ -134,6 +138,7 @@ if (bool.Parse(builder.Configuration["SeedData"]) == true)
     app.UseSwaggerUI();
 }*/
 
+app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("AllowSpecificDomain");

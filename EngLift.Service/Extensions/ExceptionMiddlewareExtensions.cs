@@ -27,14 +27,15 @@ namespace EngLift.Service.Extensions
                 {
                     Data = null,
                     Message = error.Message,
-                    StatusCode = (HttpStatusCode)(error.Data["StatusCode"] ?? HttpStatusCode.BadGateway)
+                    StatusCode = (HttpStatusCode)(error.Data["StatusCode"] ?? HttpStatusCode.BadGateway),
+                    Success = false
                 };
 
                 var options = new JsonSerializerOptions()
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 };
-
+                response.StatusCode = (int)result.StatusCode;
                 await response.WriteAsync(JsonSerializer.Serialize(result, options));
             }
         }

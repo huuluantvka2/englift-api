@@ -16,7 +16,7 @@ namespace EngLift.Model.Entities
         public string Name { get; set; }
 
         [MaxLength(256)]
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int? Prior { get; set; } = 0; //số càng cao càng xếp lên trước
         [MaxLength(256)]
         public string? Image { get; set; }

@@ -1,5 +1,4 @@
 ﻿using EngLift.Common;
-using EngLift.DTO.Base;
 using EngLift.DTO.Response;
 using EngLift.DTO.User;
 using EngLift.Service.Extensions;
@@ -26,7 +25,7 @@ namespace EngLift.WebAPI.Controllers.Admin
 
         [HttpGet("")]
         [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_USER)]
-        public async Task<IActionResult> GetAllUser([FromQuery] BaseRequest request)
+        public async Task<IActionResult> GetAllUser([FromQuery] UserRequest request)
         {
             try
             {
@@ -36,6 +35,22 @@ namespace EngLift.WebAPI.Controllers.Admin
             catch (ServiceExeption ex)
             {
                 _logger.LogInformation($"UserController -> GetAllUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpGet("{Id}")]
+        [RolesAllow(RolesName.ROLE_SYSTEM_ADMIN, RolesName.ROLE_USER_CAN_VIEW_USER)]
+        public async Task<IActionResult> GetUserById(Guid Id)
+        {
+            try
+            {
+                var result = await _userService.GetUserById(Id);
+                return Success<UserItemDTO>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"UserController -> GetUserById Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }

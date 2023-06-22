@@ -1,5 +1,4 @@
-﻿using EngLift.DTO.Base;
-using EngLift.DTO.Course;
+﻿using EngLift.DTO.Course;
 using EngLift.DTO.Response;
 using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Admin;
@@ -28,7 +27,7 @@ namespace EngLift.UnitTest.ControllerTest
         public async Task GetAllCourse_Returns_Success()
         {
             // Arrange
-            var request = new BaseRequest();
+            var request = new CourseRequest();
             var expectDataList = new DataList<CourseItemDTO>
             {
                 Items = new List<CourseItemDTO> {
@@ -36,7 +35,7 @@ namespace EngLift.UnitTest.ControllerTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Course 1",
-                Desciption = "Description of Course 1",
+                Description = "Description of Course 1",
                 Prior = 1,
                 Image = "course1.jpg",
                 TotalLesson = 10,
@@ -50,7 +49,7 @@ namespace EngLift.UnitTest.ControllerTest
             {
                 Id = Guid.NewGuid(),
                 Name = "Course 2",
-                Desciption = "Description of Course 2",
+                Description = "Description of Course 2",
                 Prior = 2,
                 Image = "course2.jpg",
                 TotalLesson = 8,
