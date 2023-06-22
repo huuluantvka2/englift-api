@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using ClosedXML.Graphics;
 using EngLift.Common;
 using EngLift.Data.Infrastructure.Interfaces;
 using EngLift.DTO.Response;
@@ -120,6 +121,7 @@ namespace EngLift.WebAPI.Controllers.Admin
                     return BadRequest("File not exist");
                 }
                 List<WordCreateExcelDTO> Words = new List<WordCreateExcelDTO>();
+                LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine("Times New Roman");
                 using (var workbook = new XLWorkbook(file.OpenReadStream()))
                 {
                     IXLWorksheet worksheet = workbook.Worksheet(1);
