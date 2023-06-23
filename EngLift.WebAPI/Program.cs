@@ -18,6 +18,7 @@ services.AddEndpointsApiExplorer();
 
 #region MYSQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"Connection {connectionString}");
 services.AddDbContext<BuildDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
@@ -102,7 +103,7 @@ services.AddCors(options =>
     options.AddPolicy("AllowSpecificDomain",
         builder =>
         {
-            builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://learn.canbantot.com")
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://canbantot.com").SetIsOriginAllowedToAllowWildcardSubdomains()
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
