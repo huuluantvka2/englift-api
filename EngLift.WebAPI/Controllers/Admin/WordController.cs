@@ -10,7 +10,6 @@ using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 internal class NoGraphicsEngine : IXLGraphicEngine
 {
     private NoGraphicsEngine() { }
@@ -140,10 +139,10 @@ namespace EngLift.WebAPI.Controllers.Admin
                 using (var workbook = new XLWorkbook(file.OpenReadStream(), loadOptions))
                 {
                     IXLWorksheet worksheet = workbook.Worksheet(1);
-                    if (worksheet.RowsUsed().Count() > 200)
-                    {
-                        throw new ServiceExeption(HttpStatusCode.BadRequest, "Limit import are 200 record");
-                    }
+                    /*                    if (worksheet.RowsUsed().Count() > 200)
+                                        {
+                                            throw new ServiceExeption(HttpStatusCode.BadRequest, "Limit import are 200 record");
+                                        }*/
                     var count = worksheet.RowsUsed().Count();
                     for (int i = 2; i <= worksheet.RowsUsed().Count(); i++)
                     {
