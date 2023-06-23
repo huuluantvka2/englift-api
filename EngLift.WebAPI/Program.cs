@@ -103,7 +103,7 @@ services.AddCors(options =>
     options.AddPolicy("AllowSpecificDomain",
         builder =>
         {
-            builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://tienganhtot.portal.canbantot.com/")
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://tienganhtot.portal.canbantot.com")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
