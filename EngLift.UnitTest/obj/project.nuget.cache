@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DV0qYBBSLggjiWmaioCbTETk6MrCqt5eHBvQpUevMzs8prL/2pF9EH5sJ5qElSWwDMdzfnwbqgvZ/sa4A7wyWQ==",
+  "dgSpecHash": "52z50ZiA1G6EpOrH51RJKcpFozj5URC7JJhdIJ7cuwLPKKqCoH3djWWNvVGzadzMtbhvkM+z3du5aWUidmjPCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
   "expectedPackageFiles": [
@@ -9,9 +9,11 @@
     "C:\\Users\\huulu\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\documentformat.openxml\\2.16.0\\documentformat.openxml.2.16.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\excelnumberformat\\1.1.0\\excelnumberformat.1.1.0.nupkg.sha512",
+    "C:\\Users\\huulu\\.nuget\\packages\\firebaseadmin\\2.3.0\\firebaseadmin.2.3.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.api.commonprotos\\2.10.0\\google.api.commonprotos.2.10.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.api.gax\\4.4.0\\google.api.gax.4.4.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.api.gax.grpc\\4.4.0\\google.api.gax.grpc.4.4.0.nupkg.sha512",
+    "C:\\Users\\huulu\\.nuget\\packages\\google.api.gax.rest\\3.2.0\\google.api.gax.rest.3.2.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.apis\\1.60.0\\google.apis.1.60.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.apis.auth\\1.60.0\\google.apis.auth.1.60.0.nupkg.sha512",
     "C:\\Users\\huulu\\.nuget\\packages\\google.apis.core\\1.60.0\\google.apis.core.1.60.0.nupkg.sha512",

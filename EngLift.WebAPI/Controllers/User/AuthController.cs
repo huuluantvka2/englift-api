@@ -56,5 +56,21 @@ namespace EngLift.WebAPI.Controllers.User
                 return HandleError(ex);
             }
         }
+
+        [HttpPost("SigninSocial")]
+        public async Task<IActionResult> LoginSocial([FromBody] UserLoginSocialDTO dto)
+        {
+            try
+            {
+                var result = await _authService.LoginSocial(dto);
+                return Success<LoginSuccessDTO>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"AuthController -> LoginSocial Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
     }
 }

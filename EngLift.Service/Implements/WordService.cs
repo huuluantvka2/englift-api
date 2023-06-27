@@ -19,6 +19,8 @@ namespace EngLift.Service.Implements
         {
             _dictionaryService = dictionaryService;
         }
+
+        #region Admin
         public async Task<DataList<WordItemDTO>> GetAllWordByLessonId(WordRequest request)
         {
             _logger.LogInformation($"WordService -> GetAllWordByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {request.LessonId}");
@@ -221,5 +223,29 @@ namespace EngLift.Service.Implements
             }
             return true;
         }
+        #endregion
+
+        #region User
+        public async Task<DataList<WordSearchResultDTO>> SearchWordAsync(SearchWordDTO request)
+        {
+            _logger.LogInformation($"WordService -> SearchWordAsync with content: {request.Content}");
+            request.Content = request.Content.ToLower();
+            var result = new DataList<WordSearchResultDTO>();
+            var query = await UnitOfWork.WordsRepo.GetAll().Where(x => x.Content.Contains(request.Content)).Select(x => new WordSearchResultDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Audio = x.Audio,
+                Content = x.Content,
+                Example = x.Example,
+                Phonetic = x.Phonetic,
+                Trans = x.Trans,
+                Position = x.Position
+            }).Take(5).ToListAsync();
+            result.Items = query;
+            _logger.LogInformation($"WordService -> SearchWordAsync with content: {request.Content} successfully");
+            return result;
+        }
+        #endregion
     }
 }

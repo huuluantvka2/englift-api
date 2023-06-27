@@ -23,6 +23,7 @@ namespace EngLift.WebAPI.Controllers.User
             _courseService = courseService;
         }
 
+        [AllowAnonymous]
         [HttpGet("")]
         public async Task<IActionResult> GetAllCorseUser([FromQuery] BaseRequest request)
         {

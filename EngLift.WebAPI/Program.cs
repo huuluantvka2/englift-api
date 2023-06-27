@@ -3,6 +3,8 @@ using EngLift.Data.Extension;
 using EngLift.DTO.User;
 using EngLift.Sercurity;
 using EngLift.Service.Extensions;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -110,6 +112,12 @@ services.AddCors(options =>
 });
 #endregion
 
+#region Firebase Init
+FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile("./englift-b241a-firebase-adminsdk.json"),
+});
+#endregion
 #region Worker Service
 services.AddHostedService<ImportWordWorker.ImportWordWorker>();
 #endregion

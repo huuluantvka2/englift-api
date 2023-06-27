@@ -187,7 +187,6 @@ C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\x
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\EngLift.WebAPI.deps.json
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\EngLift.WebAPI.runtimeconfig.json
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\appsettings.Development.json
-C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\appsettings.json
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\EngLift.WebAPI.staticwebassets.runtime.json
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\EngLift.WebAPI.exe
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\EngLift.UnitTest.deps.json
@@ -370,3 +369,6 @@ C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\S
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\XLParser.dll
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\ImportWordWorker.dll
 C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\ImportWordWorker.pdb
+C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\englift-b241a-firebase-adminsdk.json
+C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\FirebaseAdmin.dll
+C:\Users\huulu\source\repos\Core\englift-api\EngLift.UnitTest\bin\Debug\net6.0\Google.Api.Gax.Rest.dll

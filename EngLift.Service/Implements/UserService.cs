@@ -84,12 +84,14 @@ namespace EngLift.Service.Implements
                 Deteted = x.Deleted,
                 Email = x.Email,
                 FullName = x.FullName,
+                Avatar = x.Avatar,
                 OAuthId = x.OAuthId,
                 PhoneNumber = x.PhoneNumber,
                 RefCode = x.RefCode,
                 TypeLogin = x.TYPE_LOGIN,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
+
             }).FirstOrDefaultAsync();
             if (user == null)
             {

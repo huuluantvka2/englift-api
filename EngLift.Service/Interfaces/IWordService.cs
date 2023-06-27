@@ -11,5 +11,6 @@ namespace EngLift.Service.Interfaces
         Task<SingleId> DeleteWord(Guid id, Guid lessonId);
         Task<WordItemDTO> GetWordDetail(Guid id);
         Task<bool> CheckExistLesson(List<WordCreateExcelDTO> list);
+        Task<DataList<WordSearchResultDTO>> SearchWordAsync(SearchWordDTO request);
     }
 }

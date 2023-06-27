@@ -13,5 +13,7 @@
         public static string NOT_FOUND_COURSE = "NOT_FOUND_COURSE";
         public static string NOT_FOUND_LESSON = "NOT_FOUND_LESSON";
         public static string ALLOWPNGORJPG = "ALLOWPNGORJPG";
+        public static string BAD_TOKEN_OR_EXPIRE = "BAD_TOKEN_OR_EXPIRE";
+        public static string ALREADY_EMAIL = "ALREADY_EMAIL";
     }
 }

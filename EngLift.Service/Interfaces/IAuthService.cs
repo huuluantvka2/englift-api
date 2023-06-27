@@ -8,5 +8,6 @@ namespace EngLift.Service.Interfaces
         Task<LoginSuccessDTO> LoginAdmin(UserLoginDTO dto);
         Task<SingleId> CreateUser(UserSignUpDTO dto);
         Task<LoginSuccessDTO> LoginUser(UserLoginDTO dto);
+        Task<LoginSuccessDTO> LoginSocial(UserLoginSocialDTO request);
     }
 }
