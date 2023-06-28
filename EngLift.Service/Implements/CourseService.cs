@@ -157,7 +157,7 @@ namespace EngLift.Service.Implements
             IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
                 .Where(x => (String.IsNullOrEmpty(request.Search) ? true : x.Name.Contains(request.Search)) && x.Active == true);
             result.TotalRecord = query.Count();
-            query = query.OrderByDescending(x => x.Prior);
+            query = query.OrderBy(x => x.Prior);
             var data = await query.Select(x => new CourseItemPublicDTO
             {
                 Id = x.Id,
@@ -171,6 +171,29 @@ namespace EngLift.Service.Implements
             _logger.LogInformation($"GetAllCorseUser -> GetAllCorseUser with request successfully");
             return result;
         }
+
+        public async Task<CourseItemPublicDTO> GetCourseUserById(Guid courseId)
+        {
+            _logger.LogInformation($"CourseService -> GetCourseUserById with id {courseId}");
+            IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
+                .Where(x => x.Id == courseId && x.Active == true);
+            var data = await query.Select(x => new CourseItemPublicDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Description = x.Description,
+                Name = x.Name,
+            }).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND);
+            }
+            _logger.LogInformation($"CourseService -> GetCourseUserById with request successfully");
+            return data;
+        }
+
         #endregion
     }
 }

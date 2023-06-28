@@ -35,4 +35,15 @@ namespace EngLift.DTO.Lesson
         public bool Active { get; set; } = true;
         public Guid CourseId { set; get; }
     }
+
+    public class LessonItemUserDTO
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string? Author { get; set; }
+        public string? Description { get; set; }
+        public int? Viewed { get; set; } = 0;
+        public string? Image { get; set; }
+        public Guid CourseId { set; get; }
+    }
 }

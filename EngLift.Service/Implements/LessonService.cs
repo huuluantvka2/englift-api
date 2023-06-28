@@ -19,6 +19,8 @@ namespace EngLift.Service.Implements
         {
 
         }
+
+        #region Admin
         public async Task<DataList<LessonItemDTO>> GetAllLessonByCourseId(Guid CourseId, BaseRequest request)
         {
             _logger.LogInformation($"LessonService -> GetAllLessonByCourseId with request {JsonConvert.SerializeObject(request)} and CourseId {CourseId}");
@@ -164,5 +166,36 @@ namespace EngLift.Service.Implements
             _logger.LogInformation($"LessonService -> AdminDeleteUser successfully");
             return new SingleId() { Id = Id };
         }
+        #endregion
+
+        #region User
+        public async Task<DataList<LessonItemUserDTO>> GetAllLessonUserByCourseId(Guid CourseId, BaseRequest request)
+        {
+            _logger.LogInformation($"LessonService -> GetAllLessonUserByCourseId with request {JsonConvert.SerializeObject(request)} and CourseId {CourseId}");
+            var result = new DataList<LessonItemUserDTO>();
+            if (!String.IsNullOrEmpty(request.Search)) request.Search = request.Search.ToLower();
+            IQueryable<Lesson> query = UnitOfWork.LessonsRepo.GetAll()
+                .Where(x => x.CourseId == CourseId &&
+                (String.IsNullOrEmpty(request.Search) ? true : x.Name.ToLower().Contains(request.Search)) &&
+                x.Active == true);
+            result.TotalRecord = query.Count();
+            query = query.OrderBy(x => x.Prior);
+            var data = await query.Select(x => new LessonItemUserDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Description = x.Description,
+                Name = x.Name,
+                CourseId = (Guid)x.CourseId,
+                Author = x.Author,
+                Viewed = x.Viewed,
+            }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
+
+            result.Items = data;
+            _logger.LogInformation($"LessonService -> GetAllLessonUserByCourseId CourseId {CourseId} successfully");
+            return result;
+        }
+
+        #endregion
     }
 }

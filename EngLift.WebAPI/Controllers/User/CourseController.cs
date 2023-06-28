@@ -34,7 +34,23 @@ namespace EngLift.WebAPI.Controllers.User
             }
             catch (ServiceExeption ex)
             {
-                _logger.LogInformation($"GetAllCorseUser -> GetAllCorseUser Throw Exception: {ex.Message}");
+                _logger.LogInformation($"CourseController -> GetAllCorseUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetCourseUserById(Guid Id)
+        {
+            try
+            {
+                var result = await _courseService.GetCourseUserById(Id);
+                return Success<CourseItemPublicDTO>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"CourseController -> GetCourseUserById Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }
