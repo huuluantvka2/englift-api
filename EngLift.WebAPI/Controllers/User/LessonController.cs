@@ -24,8 +24,8 @@ namespace EngLift.WebAPI.Controllers.User
         }
 
         [AllowAnonymous]
-        [HttpGet("{courseId}")]
-        public async Task<IActionResult> GetAllCorseUser(Guid courseId, [FromQuery] BaseRequest request)
+        [HttpGet("Courses/{courseId}")]
+        public async Task<IActionResult> GetAllLessonUserByCourseId(Guid courseId, [FromQuery] BaseRequest request)
         {
             try
             {
@@ -34,7 +34,22 @@ namespace EngLift.WebAPI.Controllers.User
             }
             catch (ServiceExeption ex)
             {
-                _logger.LogInformation($"GetAllCorseUser -> GetAllCorseUser Throw Exception: {ex.Message}");
+                _logger.LogInformation($"LessonController -> GetAllCorseUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpGet("{lessonId}")]
+        public async Task<IActionResult> GetLessonUserById(Guid lessonId)
+        {
+            try
+            {
+                var result = await _lessonService.GetLessonUserById(lessonId);
+                return Success<LessonItemUserDTO>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"LessonController -> GetLessonUserById Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }

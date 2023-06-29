@@ -1,5 +1,6 @@
 ﻿using EngLift.Common;
 using EngLift.Data.Infrastructure.Interfaces;
+using EngLift.DTO.Base;
 using EngLift.DTO.Response;
 using EngLift.DTO.Word;
 using EngLift.Model.Entities;
@@ -241,11 +242,34 @@ namespace EngLift.Service.Implements
                 Phonetic = x.Phonetic,
                 Trans = x.Trans,
                 Position = x.Position
-            }).Take(5).ToListAsync();
+            }).Take(10).ToListAsync();
             result.Items = query;
             _logger.LogInformation($"WordService -> SearchWordAsync with content: {request.Content} successfully");
             return result;
         }
+
+        public async Task<DataList<WordSearchResultDTO>> GetAllWordUserByLessonId(Guid lessonId, BaseRequest request)
+        {
+            _logger.LogInformation($"WordService -> GetAllWordUserByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {lessonId}");
+            var result = new DataList<WordSearchResultDTO>();
+            IQueryable<Word> query = UnitOfWork.WordsRepo.GetAll().Where(x => x.Active == true && x.LessonWords.Any(y => y.LessonId == lessonId)).OrderBy(x => x.Content);
+            var data = await query.Select(x => new WordSearchResultDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Audio = x.Audio,
+                Content = x.Content,
+                Example = x.Example,
+                Phonetic = x.Phonetic,
+                Trans = x.Trans,
+                Position = x.Position
+            }).ToListAsync();
+            result.Items = data;
+            result.TotalRecord = data.Count;
+            _logger.LogInformation($"WordService -> GetAllWordUserByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {lessonId} successfully");
+            return result;
+        }
+
         #endregion
     }
 }

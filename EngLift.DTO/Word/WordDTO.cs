@@ -39,11 +39,6 @@ namespace EngLift.DTO.Word
         public bool Active { get; set; } = true;
     }
 
-    public class WordRequest : BaseRequest
-    {
-        public Guid? LessonId { get; set; }
-    }
-
     public class WordCreateExcelDTO : WordCreateDTO
     {
         public string MessageError { get; set; } = "";
@@ -58,6 +53,10 @@ namespace EngLift.DTO.Word
     {
         [Required]
         public string Content { get; set; }
+    }
+    public class WordRequest : BaseRequest
+    {
+        public Guid? LessonId { get; set; }
     }
 
     public class WordSearchResultDTO

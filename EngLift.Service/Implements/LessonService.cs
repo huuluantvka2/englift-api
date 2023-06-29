@@ -196,6 +196,29 @@ namespace EngLift.Service.Implements
             return result;
         }
 
+        public async Task<LessonItemUserDTO> GetLessonUserById(Guid lessonId)
+        {
+            _logger.LogInformation($"LessonService -> GetLessonUserById with request lessonId {lessonId}");
+            IQueryable<Lesson> query = UnitOfWork.LessonsRepo.GetAll()
+                .Where(x => x.Active == true && x.Id == lessonId);
+            var entity = await query.Select(x => new LessonItemUserDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Description = x.Description,
+                Name = x.Name,
+                CourseId = (Guid)x.CourseId,
+                Author = x.Author,
+                Viewed = x.Viewed,
+            }).FirstOrDefaultAsync();
+            if (entity == null)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.NOT_FOUND_LESSON);
+            }
+            _logger.LogInformation($"LessonService -> GetLessonUserById with request lessonId {lessonId} successfully");
+            return entity;
+        }
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using EngLift.DTO.Response;
+﻿using EngLift.DTO.Base;
+using EngLift.DTO.Response;
 using EngLift.DTO.Word;
 
 namespace EngLift.Service.Interfaces
@@ -12,5 +13,6 @@ namespace EngLift.Service.Interfaces
         Task<WordItemDTO> GetWordDetail(Guid id);
         Task<bool> CheckExistLesson(List<WordCreateExcelDTO> list);
         Task<DataList<WordSearchResultDTO>> SearchWordAsync(SearchWordDTO request);
+        Task<DataList<WordSearchResultDTO>> GetAllWordUserByLessonId(Guid lessonId, BaseRequest request);
     }
 }

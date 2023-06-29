@@ -1,4 +1,5 @@
-﻿using EngLift.DTO.Response;
+﻿using EngLift.DTO.Base;
+using EngLift.DTO.Response;
 using EngLift.DTO.Word;
 using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
@@ -22,20 +23,20 @@ namespace EngLift.WebAPI.Controllers.User
             _wordService = wordService;
         }
 
-        /*        [HttpGet("Lesson")]
-                public async Task<IActionResult> GetAllWordByLessonId([FromQuery] WordRequest request)
-                {
-                    try
-                    {
-                        var result = await _wordService.GetAllWordByLessonId(request);
-                        return Success<DataList<WordItemDTO>>(result);
-                    }
-                    catch (ServiceExeption ex)
-                    {
-                        _logger.LogInformation($"WordController -> GetAllWordByLessonId Throw Exception: {ex.Message}");
-                        return HandleError(ex);
-                    }
-                }*/
+        [HttpGet("{lessonId}")]
+        public async Task<IActionResult> GetAllWordByLessonId(Guid lessonId, [FromQuery] BaseRequest request)
+        {
+            try
+            {
+                var result = await _wordService.GetAllWordUserByLessonId(lessonId, request);
+                return Success<DataList<WordSearchResultDTO>>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"WordController -> GetAllWordByLessonId Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
 
         [AllowAnonymous]
         [HttpGet("Search")]

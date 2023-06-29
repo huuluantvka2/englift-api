@@ -12,5 +12,6 @@ namespace EngLift.Service.Interfaces
         Task<SingleId> DeleteLesson(Guid Id);
         Task<LessonItemDTO> GetLessonDetail(Guid Id);
         Task<DataList<LessonItemUserDTO>> GetAllLessonUserByCourseId(Guid CourseId, BaseRequest request);
+        Task<LessonItemUserDTO> GetLessonUserById(Guid lessonId);
     }
 }
