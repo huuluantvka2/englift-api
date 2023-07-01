@@ -11,7 +11,7 @@ namespace EngLift.Service.Implements
 {
     public class JwtService
     {
-        private const int EXPIRATION_MINUTES = 12000;
+        private const int EXPIRATION_DATE = 5;
 
         private readonly IConfiguration _configuration;
 
@@ -22,14 +22,13 @@ namespace EngLift.Service.Implements
 
         public LoginSuccessDTO CreateToken(User user, List<string>? Roles)
         {
-            var expiration = DateTime.UtcNow.AddMinutes(EXPIRATION_MINUTES);
+            var expiration = DateTime.UtcNow.AddDays(EXPIRATION_DATE);
 
             var token = CreateJwtToken(
                 CreateClaims(user, Roles),
                 CreateSigningCredentials(),
                 expiration
             );
-
             var tokenHandler = new JwtSecurityTokenHandler();
 
             return new LoginSuccessDTO
