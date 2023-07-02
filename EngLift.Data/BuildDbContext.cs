@@ -21,6 +21,7 @@ namespace EngLift.Data
         public DbSet<Word> Words { get; set; }
         public DbSet<LessonWord> LessonWords { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<UserLesson> UserLessons { get; set; }
 
         #endregion
 
@@ -63,6 +64,7 @@ namespace EngLift.Data
 
         private void BeforeSaving()
         {
+            ChangeTracker.AutoDetectChangesEnabled = true;
             var entities = ChangeTracker.Entries();
             foreach (var entity in entities)
             {

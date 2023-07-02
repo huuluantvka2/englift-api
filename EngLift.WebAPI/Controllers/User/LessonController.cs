@@ -29,7 +29,13 @@ namespace EngLift.WebAPI.Controllers.User
         {
             try
             {
-                var result = await _lessonService.GetAllLessonUserByCourseId(courseId, request);
+                Guid userId = Guid.Empty;
+                if (User.Claims.Any(x => x.Type == "UserId"))
+                {
+                    var UserIdStr = User.Claims.Where(x => x.Type == "UserId").First().Value;
+                    userId = Guid.Parse(UserIdStr);
+                }
+                var result = await _lessonService.GetAllLessonUserByCourseId(courseId, request, userId); ;
                 return Success<DataList<LessonItemUserDTO>>(result);
             }
             catch (ServiceExeption ex)
@@ -50,6 +56,22 @@ namespace EngLift.WebAPI.Controllers.User
             catch (ServiceExeption ex)
             {
                 _logger.LogInformation($"LessonController -> GetLessonUserById Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpPost("{lessonId}/History")]
+        public async Task<IActionResult> SaveStudyHistoryUser(Guid lessonId, UserLessonDTO body)
+        {
+            try
+            {
+                string UserId = User.Claims.Where(x => x.Type == "UserId").First().Value;
+                var result = await _lessonService.SaveStudyHistoryUser(Guid.Parse(UserId), lessonId, body);
+                return Success<SingleId>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"LessonController -> SaveStudyHistoryUser Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }

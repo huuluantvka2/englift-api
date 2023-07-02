@@ -46,6 +46,10 @@ namespace EngLift.DTO.User
         public string? PhoneNumber { get; set; }
         public string? RefCode { get; set; }
         public TYPE_LOGIN TypeLogin { get; set; }
+        public int TotalDateStudied { get; set; } = 0;
+        public DateTime? LastTimeStudy { get; set; }
+        public int TotalWords { get; set; } = 0;
+        public int DateTimeOffset { get; set; } = -420;
     }
 
     public class UserAdminUpdateDTO

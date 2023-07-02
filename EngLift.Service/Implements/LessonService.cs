@@ -169,29 +169,52 @@ namespace EngLift.Service.Implements
         #endregion
 
         #region User
-        public async Task<DataList<LessonItemUserDTO>> GetAllLessonUserByCourseId(Guid CourseId, BaseRequest request)
+        public async Task<DataList<LessonItemUserDTO>> GetAllLessonUserByCourseId(Guid CourseId, BaseRequest request, Guid userId)
         {
             _logger.LogInformation($"LessonService -> GetAllLessonUserByCourseId with request {JsonConvert.SerializeObject(request)} and CourseId {CourseId}");
             var result = new DataList<LessonItemUserDTO>();
             if (!String.IsNullOrEmpty(request.Search)) request.Search = request.Search.ToLower();
             IQueryable<Lesson> query = UnitOfWork.LessonsRepo.GetAll()
                 .Where(x => x.CourseId == CourseId &&
-                (String.IsNullOrEmpty(request.Search) ? true : x.Name.ToLower().Contains(request.Search)) &&
-                x.Active == true);
+                (String.IsNullOrEmpty(request.Search) || x.Name.ToLower().Contains(request.Search)) &&
+                x.Active == true && x.LessonWords.Count >= 4).Include(x => x.LessonWords);
+            if (userId != Guid.Empty) query = query.Include(x => x.UserLessons);
+
             result.TotalRecord = query.Count();
             query = query.OrderBy(x => x.Prior);
-            var data = await query.Select(x => new LessonItemUserDTO
+            IQueryable<LessonItemUserDTO> data;
+            if (userId == Guid.Empty)
             {
-                Id = x.Id,
-                Image = x.Image,
-                Description = x.Description,
-                Name = x.Name,
-                CourseId = (Guid)x.CourseId,
-                Author = x.Author,
-                Viewed = x.Viewed,
-            }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
+                data = query.Select(x => new LessonItemUserDTO
+                {
+                    Id = x.Id,
+                    Image = x.Image,
+                    Description = x.Description,
+                    Name = x.Name,
+                    CourseId = (Guid)x.CourseId,
+                    Author = x.Author,
+                    Viewed = x.Viewed,
+                });
+            }
+            else
+            {
+                data = query.Select(x => new LessonItemUserDTO
+                {
+                    Id = x.Id,
+                    Image = x.Image,
+                    Description = x.Description,
+                    Name = x.Name,
+                    CourseId = (Guid)x.CourseId,
+                    Author = x.Author,
+                    Viewed = x.Viewed,
+                    LastTimeStudy = x.UserLessons.Where(y => y.LessonId == x.Id).Select(y => y.UpdatedAt).FirstOrDefault(),
+                    LevelLesson = x.UserLessons.Where(y => y.LessonId == x.Id).Select(y => y.Level).FirstOrDefault(),
+                    NextTime = x.UserLessons.Where(y => y.LessonId == x.Id).Select(y => y.NextTime).FirstOrDefault(),
+                });
+            }
+            var queryResult = await data.Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
 
-            result.Items = data;
+            result.Items = queryResult;
             _logger.LogInformation($"LessonService -> GetAllLessonUserByCourseId CourseId {CourseId} successfully");
             return result;
         }
@@ -219,6 +242,80 @@ namespace EngLift.Service.Implements
             return entity;
         }
 
+        public async Task<SingleId> SaveStudyHistoryUser(Guid userId, Guid lessonId, UserLessonDTO body)
+        {
+            _logger.LogInformation($"LessonService -> SaveStudyHistoryUser with request userId {userId} and body {JsonConvert.SerializeObject(body)}");
+            var entity = await UnitOfWork.UserLessonRepo.GetAll().Where(x => x.UserId == userId && x.LessonId == lessonId).FirstOrDefaultAsync();
+            var lessonEntity = await UnitOfWork.LessonsRepo.GetAll().Where(x => x.Id == lessonId).Include(x => x.LessonWords).Select(x => x.LessonWords.Count).FirstOrDefaultAsync();
+            if (lessonEntity == null || lessonEntity < 4)
+            {
+                throw new ServiceExeption(HttpStatusCode.NotFound, ErrorMessage.LESSON_NOT_FOUND_OR_INVALID);
+            }
+            Console.WriteLine(DateTime.UtcNow.AddMinutes(+420));
+            if (entity == null) //TH chưa có lịch sử
+            {
+                var userEntity = UnitOfWork.UsersRepo.GetById(userId);
+                var userLesson = new UserLesson()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = userId,
+                    LessonId = lessonId,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Level = LevelLesson.LevelOne,
+                    NextTime = DateTime.UtcNow.AddDays(1),
+                    TotalWords = lessonEntity,
+                };
+                UnitOfWork.UserLessonRepo.Insert(userLesson);
+
+
+                var oldTimeStudy = userEntity.LastTimeStudy;
+                userEntity.LastTimeStudy = DateTime.UtcNow;
+                userEntity.TotalWords += lessonEntity;
+                if (oldTimeStudy == null || (DateTime.UtcNow - oldTimeStudy).Value.TotalHours > 48)
+                {
+                    userEntity.TotalDateStudied = 1;
+                }
+                else if ((DateTime.UtcNow - oldTimeStudy).Value.TotalHours > 24)
+                {
+                    userEntity.TotalDateStudied++;
+                }
+                UnitOfWork.UsersRepo.Update(userEntity);
+
+                await UnitOfWork.SaveChangesAsync();
+                _logger.LogInformation($"LessonService -> SaveStudyHistoryUser with request userId {userId} with add new UserLesson succssfully");
+            }
+            else //TH có lịch sử
+            {
+                entity.UpdatedAt = DateTime.UtcNow;
+                if (entity.Level != LevelLesson.LevelFive && DateTime.UtcNow >= entity.NextTime)
+                { //level up
+                    entity.NextTime = NextTimeRemind(entity.Level);
+                    entity.Level++;
+                }
+                UnitOfWork.UserLessonRepo.Update(entity);
+
+                await UnitOfWork.SaveChangesAsync();
+                _logger.LogInformation($"LessonService -> SaveStudyHistoryUser with request userId {userId} with update UserLesson succssfully");
+            }
+
+            return new SingleId() { Id = lessonId }; ;
+        }
         #endregion
+
+        private DateTime? NextTimeRemind(LevelLesson level)
+        {
+            switch (level)
+            {
+                case LevelLesson.LevelOne: return DateTime.UtcNow.AddDays(3);
+                case LevelLesson.LevelTwo: return DateTime.UtcNow.AddDays(7);
+                case LevelLesson.LevelThree: return DateTime.UtcNow.AddDays(15);
+                case LevelLesson.LevelFour: return DateTime.UtcNow.AddDays(30);
+                case LevelLesson.LevelFive: return null;
+                default: return null;
+            }
+        }
     }
+
+
 }

@@ -3,6 +3,7 @@ using System;
 using EngLift.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngLift.Data.Migrations
 {
     [DbContext(typeof(BuildDbContext))]
-    partial class BuildDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701152942_add lastime study")]
+    partial class addlastimestudy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,7 +409,7 @@ namespace EngLift.Data.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("NextTime")
+                    b.Property<DateTime>("NextTime")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("TotalWords")

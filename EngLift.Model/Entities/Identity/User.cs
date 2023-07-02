@@ -28,6 +28,11 @@ namespace EngLift.Model.Entities.Identity
         public bool? IsAdmin { get; set; } = false;
         public bool Active { get; set; } = true;
         public bool Deleted { get; set; } = false;
+        public int TotalDateStudied { get; set; } = 0;
+        public DateTime? LastTimeStudy { get; set; }
+        public int TotalWords { get; set; } = 0;
+        public int DateTimeOffset { get; set; } = -420;
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<UserLesson> UserLessons { get; set; }
     }
 }

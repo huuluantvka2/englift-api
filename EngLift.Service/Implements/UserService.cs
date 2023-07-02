@@ -91,6 +91,10 @@ namespace EngLift.Service.Implements
                 TypeLogin = x.TYPE_LOGIN,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
+                TotalDateStudied = x.TotalDateStudied,
+                DateTimeOffset = x.DateTimeOffset,
+                LastTimeStudy = x.LastTimeStudy,
+                TotalWords = x.TotalWords
 
             }).FirstOrDefaultAsync();
             if (user == null)

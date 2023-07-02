@@ -1,4 +1,5 @@
 ﻿using EngLift.Model.Abstracts;
+using EngLift.Model.Entities;
 
 namespace EngLift.DTO.Lesson
 {
@@ -45,5 +46,13 @@ namespace EngLift.DTO.Lesson
         public int? Viewed { get; set; } = 0;
         public string? Image { get; set; }
         public Guid CourseId { set; get; }
+        public LevelLesson? LevelLesson { get; set; }
+        public DateTime? LastTimeStudy { get; set; }
+        public DateTime? NextTime { get; set; }
+    }
+
+    public class UserLessonDTO
+    {
+        /*        public Guid LessonId { get; set; }*/
     }
 }

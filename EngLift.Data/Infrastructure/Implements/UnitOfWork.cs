@@ -57,6 +57,8 @@ namespace EngLift.Data.Infrastructure.Interfaces
         public IUserRoleRepository UserRolesRepo => userRolesRepo ?? (userRolesRepo = new UserRoleRepository(_dbFactory));
         private ILessonWordRepository lessonWordRepo { get; set; }
         public ILessonWordRepository LessonWordRepo => lessonWordRepo ?? (lessonWordRepo = new LessonWordRepository(_dbFactory));
+        private IUserLessonRepository userLessonRepository { get; set; }
+        public IUserLessonRepository UserLessonRepo => userLessonRepository ?? (userLessonRepository = new UserLessonRepository(_dbFactory));
 
         #endregion
     }

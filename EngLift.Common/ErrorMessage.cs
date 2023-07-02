@@ -15,5 +15,6 @@
         public static string ALLOWPNGORJPG = "ALLOWPNGORJPG";
         public static string BAD_TOKEN_OR_EXPIRE = "BAD_TOKEN_OR_EXPIRE";
         public static string ALREADY_EMAIL = "ALREADY_EMAIL";
+        public static string LESSON_NOT_FOUND_OR_INVALID = "LESSON_NOT_FOUND_OR_INVALID";
     }
 }
