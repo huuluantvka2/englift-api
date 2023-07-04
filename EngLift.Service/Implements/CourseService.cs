@@ -157,7 +157,7 @@ namespace EngLift.Service.Implements
             IQueryable<Course> query = UnitOfWork.CoursesRepo.GetAll()
                 .Where(x => (String.IsNullOrEmpty(request.Search) ? true : x.Name.Contains(request.Search)) && x.Active == true);
             result.TotalRecord = query.Count();
-            query = query.OrderBy(x => x.Prior);
+            query = query.OrderByDescending(x => x.Prior);
             var data = await query.Select(x => new CourseItemPublicDTO
             {
                 Id = x.Id,
