@@ -145,6 +145,8 @@ namespace EngLift.Service.Implements
                             TYPE_LOGIN = TYPE_LOGIN.GOOGLE,
                             NormalizedUserName = Uid,
                             CreatedAt = DateTime.UtcNow,
+                            IsNotify = false,
+
                         };
                         var passwordHasher = new PasswordHasher<User>();
                         user.PasswordHash = passwordHasher.HashPassword(user, CommonFunc.GenerateRandomPassword(12));
@@ -170,5 +172,6 @@ namespace EngLift.Service.Implements
                 throw new ServiceExeption(HttpStatusCode.BadRequest, ErrorMessage.BAD_TOKEN_OR_EXPIRE);
             }
         }
+
     }
 }

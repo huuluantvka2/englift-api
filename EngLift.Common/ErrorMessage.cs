@@ -16,5 +16,6 @@
         public static string BAD_TOKEN_OR_EXPIRE = "BAD_TOKEN_OR_EXPIRE";
         public static string ALREADY_EMAIL = "ALREADY_EMAIL";
         public static string LESSON_NOT_FOUND_OR_INVALID = "LESSON_NOT_FOUND_OR_INVALID";
+        public static string NOT_FOUND_USER = "NOT_FOUND_USER";
     }
 }

@@ -32,6 +32,13 @@ namespace EngLift.Model.Entities.Identity
         public DateTime? LastTimeStudy { get; set; }
         public int TotalWords { get; set; } = 0;
         public int DateTimeOffset { get; set; } = -420;
+        [MaxLength(256)]
+        public string? Introduce { get; set; }
+        [MaxLength(256)]
+        public string? Address { get; set; }
+        public bool? Gender { get; set; }
+        public bool? IsNotify { get; set; }
+        public int? TimeRemind { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserLesson> UserLessons { get; set; }
     }

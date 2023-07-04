@@ -50,6 +50,11 @@ namespace EngLift.DTO.User
         public DateTime? LastTimeStudy { get; set; }
         public int TotalWords { get; set; } = 0;
         public int DateTimeOffset { get; set; } = -420;
+        public string? Address { get; set; }
+        public int? TimeRemind { get; set; } = 20;
+        public bool? IsNotify { get; set; }
+        public string? Introduce { get; set; }
+        public bool? Gender { set; get; }
     }
 
     public class UserAdminUpdateDTO
@@ -72,4 +77,33 @@ namespace EngLift.DTO.User
         public string Uid { get; set; }
         public TYPE_LOGIN TypeLogin { get; set; }
     }
+
+    public class UserUpdateDto
+    {
+        public string FullName { get; set; }
+        public string? Address { get; set; }
+        public int TimeRemind { get; set; } = 20;
+        public string? PhoneNumber { get; set; }
+        public bool? IsNotify { get; set; }
+        public string? RefCode { get; set; }
+        public string? Introduce { get; set; }
+        public bool? Gender { set; get; }
+    }
+
+
+    public class ReportWordDto
+    {
+        public int OffsetTime { get; set; }
+        public int Days { get; set; }
+    }
+    public class ReportWordData
+    {
+        public List<int> Datas { get; set; }
+        public List<string> Categories { get; set; }
+        public int? TotalLessons { get; set; }
+        public int? TotalWords { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastTimeStudy { get; set; }
+    }
+
 }

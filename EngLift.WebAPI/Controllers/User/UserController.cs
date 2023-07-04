@@ -1,4 +1,5 @@
-﻿using EngLift.DTO.User;
+﻿using EngLift.DTO.Response;
+using EngLift.DTO.User;
 using EngLift.Service.Extensions;
 using EngLift.Service.Interfaces;
 using EngLift.WebAPI.Controllers.Base;
@@ -32,7 +33,39 @@ namespace EngLift.WebAPI.Controllers.User
             }
             catch (ServiceExeption ex)
             {
-                _logger.LogInformation($"AuthController -> GetProfile Throw Exception: {ex.Message}");
+                _logger.LogInformation($"UserController -> GetProfile Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpPut("Profile")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDto dto)
+        {
+            try
+            {
+                string UserId = User.Claims.Where(x => x.Type == "UserId").First().Value;
+                var result = await _userService.UpdateUser(Guid.Parse(UserId), dto);
+                return Success<SingleId>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"UserController -> UpdateUser Throw Exception: {ex.Message}");
+                return HandleError(ex);
+            }
+        }
+
+        [HttpPost("ReportWords")]
+        public async Task<IActionResult> GetReportWords([FromBody] ReportWordDto dto)
+        {
+            try
+            {
+                string UserId = User.Claims.Where(x => x.Type == "UserId").First().Value;
+                var result = await _userService.GetReportWords(Guid.Parse(UserId), dto);
+                return Success<ReportWordData>(result);
+            }
+            catch (ServiceExeption ex)
+            {
+                _logger.LogInformation($"UserController -> GetReportWords Throw Exception: {ex.Message}");
                 return HandleError(ex);
             }
         }

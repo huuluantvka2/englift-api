@@ -94,7 +94,13 @@ namespace EngLift.Service.Implements
                 TotalDateStudied = x.TotalDateStudied,
                 DateTimeOffset = x.DateTimeOffset,
                 LastTimeStudy = x.LastTimeStudy,
-                TotalWords = x.TotalWords
+                TotalWords = x.TotalWords,
+                Address = x.Address,
+                Gender = x.Gender,
+                Introduce = x.Introduce,
+                IsNotify = x.IsNotify,
+                TimeRemind = x.TimeRemind,
+
 
             }).FirstOrDefaultAsync();
             if (user == null)
@@ -148,6 +154,77 @@ namespace EngLift.Service.Implements
 
             _logger.LogInformation($"UserService -> AdminDeleteUser successfully");
             return new SingleId() { Id = Id };
+        }
+
+        public async Task<SingleId> UpdateUser(Guid userId, UserUpdateDto dto)
+        {
+            _logger.LogInformation($"UserService -> UpdateUser with data {JsonConvert.SerializeObject(dto)}");
+            var entity = await UnitOfWork.UsersRepo.GetAll().Where(x => x.Id == userId).FirstOrDefaultAsync();
+            if (entity == null || entity.IsAdmin == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.BadRequest, ErrorMessage.NOT_FOUND_USER);
+            }
+            else if (entity.Deleted == true)
+            {
+                throw new ServiceExeption(HttpStatusCode.BadRequest, ErrorMessage.USER_IS_DELETED);
+            }
+
+            entity.FullName = dto.FullName;
+            entity.PhoneNumber = dto.PhoneNumber;
+            entity.RefCode = dto.RefCode;
+            entity.Address = dto.Address;
+            entity.IsNotify = dto.IsNotify;
+            entity.TimeRemind = dto.TimeRemind;
+            entity.Introduce = dto.Introduce;
+            entity.Gender = dto.Gender;
+
+            UnitOfWork.UsersRepo.Update(entity);
+
+            await UnitOfWork.SaveChangesAsync();
+            _logger.LogInformation($"UserService -> UpdateUser with data successfully");
+            return new SingleId() { Id = userId };
+        }
+
+        public async Task<ReportWordData> GetReportWords(Guid userId, ReportWordDto dto)
+        {
+            _logger.LogInformation($"UserService -> GetReportWords with data {JsonConvert.SerializeObject(dto)}");
+            if (dto.Days > 31) dto.Days = 31;
+            var now = DateTime.UtcNow.AddMinutes(-dto.OffsetTime);
+            var dateLast = now.AddDays(-dto.Days + 1);
+            DateTime dateFrom = dateLast.GetBeginingOfTheDay();
+            DateTime dateTo = now.GetEndingOfTheDay();
+            var result = await UnitOfWork.UserLessonRepo.GetAll().Where(x => x.UserId == userId && x.CreatedAt >= dateFrom && x.CreatedAt <= dateTo).ToListAsync();
+            var userInfo = await UnitOfWork.UsersRepo.GetAll().Where(x => x.Id == userId).Include(x => x.UserLessons).Select(x => new
+            {
+                LastTimeStudy = x.LastTimeStudy,
+                TotalWords = x.TotalWords,
+                CreatedAt = x.CreatedAt,
+                TotalLessons = x.UserLessons.Count(),
+            }).FirstOrDefaultAsync();
+            int count = 0;
+            var response = new ReportWordData()
+            {
+                Datas = new List<int>(),
+                Categories = new List<string>(),
+                CreatedAt = userInfo.CreatedAt,
+                LastTimeStudy = userInfo.LastTimeStudy,
+                TotalWords = userInfo.TotalWords,
+                TotalLessons = userInfo.TotalLessons
+            };
+            while (true)
+            {
+                var from = dateFrom.AddDays(count);
+                var to = from.GetEndingOfTheDay();
+                var dataOfDate = result.Where(x => x.CreatedAt >= from && x.CreatedAt <= to);
+                response.Categories.Add(from.GetDateMonthYear());
+                int sum = dataOfDate.Sum(x => x.TotalWords);
+                response.Datas.Add(sum);
+                count++;
+                if (count > dto.Days - 1) break;
+            }
+
+
+            return response;
         }
     }
 }

@@ -9,5 +9,7 @@ namespace EngLift.Service.Interfaces
         Task<DataList<UserItemDTO>> GetAllUser(UserRequest request);
         Task<SingleId> AdminDeleteUser(Guid Id);
         Task<SingleId> AdminUpdateUser(Guid Id, UserAdminUpdateDTO dto);
+        Task<SingleId> UpdateUser(Guid userId, UserUpdateDto dto);
+        Task<ReportWordData> GetReportWords(Guid userId, ReportWordDto dto);
     }
 }
