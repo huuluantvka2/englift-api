@@ -194,6 +194,23 @@ namespace EngLift.Service.Implements
             return data;
         }
 
+        public async Task<List<Course>> GetCourseMigration()
+        {
+            List<Course> query = await UnitOfWork.CoursesRepo.GetAll().ToListAsync();
+            return query;
+        }
+
+        public async Task<List<Lesson>> GetLessonMigration()
+        {
+            List<Lesson> query = await UnitOfWork.LessonsRepo.GetAll().ToListAsync();
+            return query;
+        }
+
+        public async Task<List<Word>> GetWordMigration()
+        {
+            List<Word> query = await UnitOfWork.WordsRepo.GetAll().ToListAsync();
+            return query;
+        }
         #endregion
     }
 }
