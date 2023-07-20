@@ -10,6 +10,7 @@ using EngLift.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Data;
 using System.Net;
 
 namespace EngLift.Service.Implements
@@ -194,23 +195,34 @@ namespace EngLift.Service.Implements
             return data;
         }
 
-        public async Task<List<Course>> GetCourseMigration()
-        {
-            List<Course> query = await UnitOfWork.CoursesRepo.GetAll().ToListAsync();
-            return query;
-        }
+        /*        public async Task MigrationCourse()
+                {
+                    using (var connection = new MySqlConnection("server=database.canbantot.com;port=3305;database=EngLift_Prod;uid=root;password=123456Abc@;"))
+                    {
+                        connection.Open();
+                        string query = "SELECT * FROM LessonWords";
+                        var command = new MySqlCommand(query, connection);
+                        List<LessonWord> words = new List<LessonWord>();
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var LessonWord = new LessonWord()
+                                {
+                                    Id = reader.GetGuid("Id"),
+                                    LessonId = reader.GetGuid("LessonId"),
+                                    WordId = reader.GetGuid("WordId"),
+                                };
+                                words.Add(LessonWord);
+                            }
+                        }
+                        connection.Clone();
+                        UnitOfWork.LessonWordRepo.Insert(words);
 
-        public async Task<List<Lesson>> GetLessonMigration()
-        {
-            List<Lesson> query = await UnitOfWork.LessonsRepo.GetAll().ToListAsync();
-            return query;
-        }
+                        await UnitOfWork.SaveChangesAsync();
+                    }
+                }*/
 
-        public async Task<List<Word>> GetWordMigration()
-        {
-            List<Word> query = await UnitOfWork.WordsRepo.GetAll().ToListAsync();
-            return query;
-        }
         #endregion
     }
 }

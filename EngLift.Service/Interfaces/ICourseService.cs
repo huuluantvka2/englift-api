@@ -1,7 +1,6 @@
 ﻿using EngLift.DTO.Base;
 using EngLift.DTO.Course;
 using EngLift.DTO.Response;
-using EngLift.Model.Entities;
 
 namespace EngLift.Service.Interfaces
 {
@@ -14,8 +13,5 @@ namespace EngLift.Service.Interfaces
         Task<CourseItemDTO> GetCourseDetail(Guid Id);
         Task<DataList<CourseItemPublicDTO>> GetAllCorseUser(BaseRequest request);
         Task<CourseItemPublicDTO> GetCourseUserById(Guid courseId);
-        Task<List<Word>> GetWordMigration();
-        Task<List<Lesson>> GetLessonMigration();
-        Task<List<Course>> GetCourseMigration();
     }
 }

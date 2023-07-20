@@ -105,5 +105,7 @@ namespace EngLift.DTO.User
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastTimeStudy { get; set; }
     }
-
+    public class TestDto
+    {
+    }
 }

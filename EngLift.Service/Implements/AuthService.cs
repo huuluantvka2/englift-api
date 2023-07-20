@@ -173,5 +173,10 @@ namespace EngLift.Service.Implements
             }
         }
 
+        public async Task MigrationDb()
+        {
+            string BaseUrl = "https://tienganhtot.portal.canbantot.com";
+
+        }
     }
 }

@@ -9,6 +9,7 @@ using EngLift.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net;
 
 namespace EngLift.Service.Implements
@@ -72,6 +73,56 @@ namespace EngLift.Service.Implements
             _logger.LogInformation($"WordService -> GetAllWordByLessonId LessonId {request.LessonId} successfully");
             return result;
         }
+
+        public async Task<DataList<WordItemDTO>> GetAllWordTest(WordRequest request)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId with request {JsonConvert.SerializeObject(request)} and LessonId {request.LessonId}");
+            var result = new DataList<WordItemDTO>();
+            IQueryable<Word> query = UnitOfWork.WordsRepo.GetAll()
+                .Where(x =>
+                String.IsNullOrEmpty(request.Search) ? true : (x.Content.ToLower().Contains(request.Search) || x.Trans.ToLower().Contains(request.Search)));
+            if (request.Sort != null)
+            {
+                switch (request.Sort)
+                {
+                    case 1: query = query.OrderBy(x => x.CreatedAt); break;
+                    case 2: query = query.OrderByDescending(x => x.CreatedAt); break;
+                    case 3: query = query.OrderBy(x => x.Content); break;
+                    case 4: query = query.OrderByDescending(x => x.Content); break;
+                    case 5: query = query.OrderBy(x => x.Trans); break;
+                    case 6: query = query.OrderByDescending(x => x.Trans); break;
+                    case 7: query = query.OrderBy(x => x.UpdatedAt); break;
+                    case 8: query = query.OrderByDescending(x => x.UpdatedAt); break;
+                }
+            }
+            else query = query.OrderByDescending(x => x.CreatedAt);
+
+            var data = await query.Select(x => new WordItemDTO
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Audio = x.Audio,
+                CreatedAt = x.CreatedAt,
+                CreatedBy = x.CreatedBy,
+                Content = x.Content,
+                Example = x.Example,
+                UpdatedAt = x.UpdatedAt,
+                UpdatedBy = x.UpdatedBy,
+                Active = x.Active,
+                Phonetic = x.Phonetic,
+                Trans = x.Trans,
+                Position = x.Position
+            }).Skip((request.Page - 1) * request.Limit).Take(request.Limit).ToListAsync();
+
+            result.Items = data;
+            _logger.LogInformation($"WordService -> GetAllWordByLessonId LessonId {request.LessonId} successfully");
+            timer.Stop();
+            Console.WriteLine($"Time request is: {timer.ElapsedMilliseconds}");
+            return result;
+        }
+
 
         public async Task<WordItemDTO> GetWordDetail(Guid Id)
         {

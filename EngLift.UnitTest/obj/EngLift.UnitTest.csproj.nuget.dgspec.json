@@ -129,9 +129,9 @@
               "target": "Package",
               "version": "[6.0.16, )"
             },
-            "Pomelo.EntityFrameworkCore.MySql": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.2, )"
+              "version": "[6.0.16, )"
             }
           },
           "imports": [
@@ -619,15 +619,15 @@
               "target": "Package",
               "version": "[6.0.16, )"
             },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.16, )"
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[6.0.2, )"
             },
             "Serilog.Extensions.Hosting": {
               "target": "Package",

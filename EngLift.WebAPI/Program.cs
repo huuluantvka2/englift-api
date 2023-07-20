@@ -23,7 +23,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 Console.WriteLine($"Connection {connectionString}");
 services.AddDbContext<BuildDbContext>(options =>
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    /*    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));*/
+    options.UseSqlServer(connectionString);
 });
 #endregion
 
