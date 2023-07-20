@@ -151,7 +151,10 @@ if (bool.Parse(builder.Configuration["SeedData"]) == true)
 
 app.UseStaticFiles();
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("v1/swagger.json", "Englift V1");
+});
 app.UseCors("AllowSpecificDomain");
 //global handle error
 app.UseMiddleware<ErrorHandlerMiddleware>();
