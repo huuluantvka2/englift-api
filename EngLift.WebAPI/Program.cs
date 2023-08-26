@@ -121,7 +121,7 @@ FirebaseApp.Create(new AppOptions()
 });
 #endregion
 #region Worker Service
-services.AddHostedService<ImportWordWorker.ImportWordWorker>();
+/*services.AddHostedService<ImportWordWorker.ImportWordWorker>();*/
 #endregion
 var app = builder.Build();
 
