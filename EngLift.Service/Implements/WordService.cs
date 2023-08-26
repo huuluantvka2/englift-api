@@ -61,6 +61,7 @@ namespace EngLift.Service.Implements
                 CreatedBy = x.CreatedBy,
                 Content = x.Content,
                 Example = x.Example,
+                China = x.China,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
                 Active = x.Active,
@@ -136,6 +137,7 @@ namespace EngLift.Service.Implements
                 CreatedBy = x.CreatedBy,
                 Content = x.Content,
                 Example = x.Example,
+                China=x.China,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
                 Active = x.Active,
@@ -173,6 +175,7 @@ namespace EngLift.Service.Implements
                     Image = dto.Image,
                     Content = dto.Content,
                     Example = dto.Example,
+                    China = dto.China,
                     Active = dto.Active,
                     Phonetic = dto.Phonetic,
                     Trans = dto.Trans,
@@ -183,8 +186,8 @@ namespace EngLift.Service.Implements
                     new LessonWord() { LessonId=dto.LessonId,WordId = word.Id}
                 };
 
-                var audio = await _dictionaryService.GetLinkAudio(dto.Content);
-                if (!string.IsNullOrEmpty(audio)) word.Audio = audio;
+/*                var audio = await _dictionaryService.GetLinkAudio(dto.Content);
+                if (!string.IsNullOrEmpty(audio)) word.Audio = audio;*/
                 UnitOfWork.WordsRepo.Insert(word);
 
                 await UnitOfWork.SaveChangesAsync();
@@ -222,6 +225,7 @@ namespace EngLift.Service.Implements
             entity.Image = dto.Image;
             entity.Content = dto.Content;
             entity.Image = dto.Image;
+            entity.China = dto.China;
             entity.Example = dto.Example;
             entity.Active = dto.Active;
             entity.Phonetic = dto.Phonetic;
@@ -290,6 +294,7 @@ namespace EngLift.Service.Implements
                 Audio = x.Audio,
                 Content = x.Content,
                 Example = x.Example,
+                China = x.China,
                 Phonetic = x.Phonetic,
                 Trans = x.Trans,
                 Position = x.Position
@@ -311,6 +316,7 @@ namespace EngLift.Service.Implements
                 Audio = x.Audio,
                 Content = x.Content,
                 Example = x.Example,
+                China=x.China,
                 Phonetic = x.Phonetic,
                 Trans = x.Trans,
                 Position = x.Position

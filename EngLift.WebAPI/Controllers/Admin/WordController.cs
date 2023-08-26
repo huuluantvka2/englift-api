@@ -151,29 +151,31 @@ namespace EngLift.WebAPI.Controllers.Admin
                         word.Content = Content;
                         if (String.IsNullOrEmpty(Content)) word.MessageError += "Thiếu từ vựng, ";
 
-                        var Phonetic = worksheet.Cell(i, 2).Value.ToString();
-                        word.Phonetic = Phonetic;
-                        if (String.IsNullOrEmpty(Phonetic)) word.MessageError += "Thiếu phiên âm, ";
-
-                        var Trans = worksheet.Cell(i, 3).Value.ToString();
+                        var Trans = worksheet.Cell(i, 2).Value.ToString();
                         word.Trans = Trans;
                         if (String.IsNullOrEmpty(Trans)) word.MessageError += "Thiếu dịch nghĩa, ";
 
-                        var Position = worksheet.Cell(i, 4).Value.ToString();
-                        word.Position = Position;
-                        if (String.IsNullOrEmpty(Position)) word.MessageError += "Thiếu loại từ, ";
-
-                        var Example = worksheet.Cell(i, 5).Value.ToString();
+                        var Example = worksheet.Cell(i, 3).Value.ToString();
                         word.Example = Example;
                         if (String.IsNullOrEmpty(Example)) word.MessageError += "Thiếu ví dụ,";
-                        Words.Add(word);
 
-                        var LessonId = worksheet.Cell(i, 6).Value.ToString();
+                        var Position = worksheet.Cell(i, 4).Value.ToString();
+                        word.Position = Position;
+
+                        var Phonetic = worksheet.Cell(i, 5).Value.ToString();
+                        word.Phonetic = Phonetic;
+
+                        var China = worksheet.Cell(i, 6).Value.ToString();
+                        word.China = China;
+
+                        var LessonId = worksheet.Cell(i, 7).Value.ToString();
                         word.LessonId = LessonId;
                         if (String.IsNullOrEmpty(LessonId)) word.MessageError += "Thiếu LessonId";
 
-                        worksheet.Cell(i, 7).Value = string.IsNullOrEmpty(word.MessageError) ? "Thành công" : word.MessageError;
-                        if (worksheet.Cell(i, 7).Value.ToString() != "Thành công") worksheet.Cell(i, 7).Style.Fill.BackgroundColor = XLColor.Red;
+                        Words.Add(word);
+
+                        worksheet.Cell(i, 8).Value = string.IsNullOrEmpty(word.MessageError) ? "Thành công" : word.MessageError;
+                        if (worksheet.Cell(i, 8).Value.ToString() != "Thành công") worksheet.Cell(i, 7).Style.Fill.BackgroundColor = XLColor.Red;
                     }
                     var list = Words.Where(x => String.IsNullOrEmpty(x.MessageError)).ToList();
                     await _wordService.CheckExistLesson(list);

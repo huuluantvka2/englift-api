@@ -22,13 +22,14 @@ namespace EngLift.Model.Entities
         [Required]
         [MaxLength(256)]
         public string Example { get; set; }
-        [Required]
         [MaxLength(50)]
-        public string Phonetic { get; set; }
+        public string? Phonetic { get; set; }
         [MaxLength(256)]
         public string? Image { get; set; }
         [MaxLength(50)]
         public string? Position { get; set; }
+        [MaxLength(50)]
+        public string? China { get; set; }
         public bool Active { get; set; } = true;
 
         public ICollection<LessonWord> LessonWords { get; set; }

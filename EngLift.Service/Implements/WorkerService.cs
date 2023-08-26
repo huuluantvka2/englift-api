@@ -31,14 +31,15 @@ namespace EngLift.Service.Implements
                         Example = wordItem.Example,
                         Active = wordItem.Active,
                         Phonetic = wordItem.Phonetic,
+                        China = wordItem.China,
                         Trans = wordItem.Trans,
                         Position = wordItem.Position,
                     };
                     word.LessonWords = new List<LessonWord>() {
                     new LessonWord() { LessonId=Guid.Parse(wordItem.LessonId),WordId = word.Id}
                 };
-                    var audio = await _dictionaryService.GetLinkAudio(wordItem.Content);
-                    if (!string.IsNullOrEmpty(audio)) word.Audio = audio;
+/*                    var audio = await _dictionaryService.GetLinkAudio(wordItem.Content);
+                    if (!string.IsNullOrEmpty(audio)) word.Audio = audio;*/
                     UnitOfWork.WordsRepo.Insert(word);
                     _logger.LogInformation($"WorkerService -> SaveWords successfully");
                 }

@@ -80,6 +80,7 @@ namespace EngLift.Service.Implements
                 Name = x.Name,
                 UpdatedAt = x.UpdatedAt,
                 UpdatedBy = x.UpdatedBy,
+                Active= x.Active,
                 TotalLesson = x.Lessons.Count(),
             }).FirstOrDefaultAsync();
             if (entity == null)

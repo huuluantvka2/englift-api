@@ -9,9 +9,10 @@ namespace EngLift.DTO.Word
         public string Content { get; set; }
         public string Trans { get; set; }
         public string Example { get; set; }
-        public string Phonetic { get; set; }
+        public string? Phonetic { get; set; }
         public string? Image { get; set; }
         public string? Position { get; set; }
+        public string? China { get; set; }
         public bool Active { get; set; } = true;
         public Guid LessonId { get; set; }
     }
@@ -21,8 +22,9 @@ namespace EngLift.DTO.Word
         public string Content { get; set; }
         public string Trans { get; set; }
         public string Example { get; set; }
-        public string Phonetic { get; set; }
+        public string? Phonetic { get; set; }
         public string? Image { get; set; }
+        public string? China { get; set; }
         public string? Position { get; set; }
         public bool Active { get; set; } = true;
     }
@@ -33,7 +35,8 @@ namespace EngLift.DTO.Word
         public string Content { get; set; }
         public string Trans { get; set; }
         public string Example { get; set; }
-        public string Phonetic { get; set; }
+        public string? Phonetic { get; set; }
+        public string? China { get; set; }
         public string? Image { get; set; }
         public string? Position { get; set; }
         public bool Active { get; set; } = true;
@@ -65,7 +68,8 @@ namespace EngLift.DTO.Word
         public string? Audio { get; set; }
         public string Content { get; set; }
         public string Trans { get; set; }
-        public string Example { get; set; }
+        public string? Example { get; set; }
+        public string? China { get; set; }
         public string Phonetic { get; set; }
         public string? Image { get; set; }
         public string? Position { get; set; }

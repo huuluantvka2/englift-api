@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj": {}
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj",
         "projectName": "EngLift.Common",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,18 +55,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj",
         "projectName": "EngLift.Data",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,14 +83,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
               }
             }
           }
@@ -150,18 +150,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj",
         "projectName": "EngLift.DTO",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\EngLift.DTO.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.DTO\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -178,8 +178,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
               }
             }
           }
@@ -215,18 +215,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj",
         "projectName": "EngLift.Model",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -276,18 +276,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj",
         "projectName": "EngLift.Sercurity",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -304,14 +304,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
               }
             }
           }
@@ -351,18 +351,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj",
         "projectName": "EngLift.Service",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -379,14 +379,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Common\\EngLift.Common.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Common\\EngLift.Common.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Model\\EngLift.Model.csproj"
               }
             }
           }
@@ -458,18 +458,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
         "projectName": "EngLift.UnitTest",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.UnitTest\\EngLift.UnitTest.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.UnitTest\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.UnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -486,11 +486,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj"
               }
             }
           }
@@ -546,18 +546,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj",
         "projectName": "EngLift.WebAPI",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\EngLift.WebAPI.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -568,23 +568,24 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Sercurity\\EngLift.Sercurity.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj"
               }
             }
           }
@@ -669,18 +670,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj": {
+    "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj",
+        "projectUniqueName": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj",
         "projectName": "ImportWordWorker",
-        "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj",
+        "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\ImportWordWorker.csproj",
         "packagesPath": "C:\\Users\\huulu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\ImportWordWorker\\obj\\",
+        "outputPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\ImportWordWorker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huulu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -697,11 +698,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Data\\EngLift.Data.csproj"
               },
-              "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
-                "projectPath": "C:\\Users\\huulu\\source\\repos\\Core\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
+              "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj": {
+                "projectPath": "C:\\Users\\huulu\\Documents\\englift\\englift-api\\EngLift.Service\\EngLift.Service.csproj"
               }
             }
           }
@@ -737,7 +738,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }

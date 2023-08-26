@@ -469,6 +469,10 @@ namespace EngLift.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("China")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -490,7 +494,6 @@ namespace EngLift.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Phonetic")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
